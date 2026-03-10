@@ -1,6 +1,14 @@
-# Turborepo starter
+# Video-AI
 
-This Turborepo starter is maintained by the Turborepo core team.
+Turborepo monorepo for video applications and content.
+
+## Documentation
+
+| Doc | Link | Description |
+|-----|------|-------------|
+| **00** | [architecture](KM/Docs/00-architecture.md) | Directory tree, locations, repository links |
+| **01** | [index](KM/Docs/01-index.md) | Index & links to runbooks |
+| **Runbooks** | [KM/Docs/runbooks](KM/Docs/runbooks/) | [monorepo](KM/Docs/runbooks/monorepo.md) · [submodules](KM/Docs/runbooks/dependencies-submodules.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) |
 
 ## Using this example
 
