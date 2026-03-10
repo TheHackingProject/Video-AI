@@ -7,3 +7,6 @@
 [submodule "KM/Course/Fullstack"]
 	path = KM/Course/Fullstack
 	url = https://github.com/TheHackingProject/course-fullstack.git
+[submodule "KM/Course/React"]
+	path = KM/Course/React
+	url = https://github.com/TheHackingProject/next-react.git
