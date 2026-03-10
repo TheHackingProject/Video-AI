@@ -1,3 +1,9 @@
 [submodule "KM/Docs"]
 	path = KM/Docs
 	url = https://github.com/TheHackingProject/Video-KM.git
+[submodule "KM/Course/Intro"]
+	path = KM/Course/Intro
+	url = https://github.com/TheHackingProject/course-intro.git
+[submodule "KM/Course/Fullstack"]
+	path = KM/Course/Fullstack
+	url = https://github.com/TheHackingProject/course-fullstack.git
