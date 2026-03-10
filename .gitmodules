@@ -1,0 +1,3 @@
+[submodule "KM/Docs"]
+	path = KM/Docs
+	url = https://github.com/TheHackingProject/Video-KM.git
