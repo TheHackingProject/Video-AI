@@ -10,3 +10,6 @@
 [submodule "KM/Course/React"]
 	path = KM/Course/React
 	url = https://github.com/TheHackingProject/next-react.git
+[submodule "packages/skills/Remotion"]
+	path = packages/skills/Remotion
+	url = https://github.com/remotion-dev/skills.git
