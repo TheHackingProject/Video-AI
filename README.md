@@ -8,7 +8,7 @@ Turborepo monorepo for video applications and content.
 |-----|------|-------------|
 | **00** | [architecture](KM/Docs/00-architecture.md) | Directory tree, locations, repository links |
 | **01** | [index](KM/Docs/01-index.md) | Index & links to runbooks |
-| **Runbooks** | [KM/Docs/runbooks](KM/Docs/runbooks/) | [monorepo](KM/Docs/runbooks/monorepo.md) · [submodules](KM/Docs/runbooks/dependencies-submodules.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) |
+| **Runbooks** | [KM/Docs/runbooks](KM/Docs/runbooks/) | [monorepo](KM/Docs/runbooks/monorepo.md) · [submodules](KM/Docs/runbooks/dependencies-submodules.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) · [remotion](KM/Docs/runbooks/remotion.md) |
 
 ## Using this example
 
@@ -26,7 +26,9 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `storybook`: [Storybook](https://storybook.js.org/) for component library documentation
+- `remotion`: [Remotion](https://www.remotion.dev/) Studio for video generation
+- `@repo/ui`: React component library shared by apps (includes Remotion components in `lib/remotion/`)
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
