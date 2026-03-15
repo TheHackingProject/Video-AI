@@ -4,11 +4,15 @@ Turborepo monorepo for video applications and content.
 
 ## Documentation
 
-| Doc | Link | Description |
-|-----|------|-------------|
-| **00** | [architecture](KM/Docs/00-architecture.md) | Directory tree, locations, repository links |
-| **01** | [index](KM/Docs/01-index.md) | Index & links to runbooks |
-| **Runbooks** | [KM/Docs/runbooks](KM/Docs/runbooks/) | [monorepo](KM/Docs/runbooks/monorepo.md) · [submodules](KM/Docs/runbooks/dependencies-submodules.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) · [remotion](KM/Docs/runbooks/remotion.md) |
+Documentation organized using the [Diataxis](https://diataxis.fr/) framework.
+
+| Category | Link | Description |
+|----------|------|-------------|
+| **Home** | [KM/Docs/Home.md](KM/Docs/Home.md) | Main entry point (MOC) |
+| **Tutorial** | [getting-started](KM/Docs/tutorials/getting-started.md) | First steps with Video-AI |
+| **How-to** | [KM/Docs/how-to/](KM/Docs/how-to/) | [monorepo](KM/Docs/how-to/monorepo.md) · [bun-biome](KM/Docs/how-to/bun-biome.md) · [storybook](KM/Docs/how-to/storybook.md) · [remotion](KM/Docs/how-to/remotion.md) |
+| **Reference** | [KM/Docs/reference/](KM/Docs/reference/) | [architecture](KM/Docs/reference/architecture.md) · [cli-commands](KM/Docs/reference/cli-commands.md) · [remotion-components](KM/Docs/reference/remotion-components.md) |
+| **Explanation** | [monorepo-choices](KM/Docs/explanation/monorepo-choices.md) | Why Turborepo, Bun, Biome? |
 
 ## Using this example
 
