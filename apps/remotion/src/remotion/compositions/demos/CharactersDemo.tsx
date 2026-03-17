@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { Avatar, SpeakingHead, Silhouette } from "../../../../packages/ui/src/lib/remotion";
+import { Avatar, SpeakingHead, Silhouette } from "@repo/ui/remotion";
 
 export const CharactersDemo: React.FC = () => {
   return (

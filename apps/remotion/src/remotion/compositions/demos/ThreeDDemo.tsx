@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { RotatingObject, FloatingText, ParticleField } from "../../../../packages/ui/src/lib/remotion";
+import { RotatingObject, FloatingText, ParticleField } from "@repo/ui/remotion";
 
 export const ThreeDDemo: React.FC = () => {
   return (

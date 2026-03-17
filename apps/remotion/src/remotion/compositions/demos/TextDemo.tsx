@@ -4,7 +4,7 @@ import {
   WordByWord,
   TextReveal,
   GlitchText,
-} from "../../../../packages/ui/src/lib/remotion";
+} from "@repo/ui/remotion";
 
 export const TextDemo: React.FC = () => {
   return (

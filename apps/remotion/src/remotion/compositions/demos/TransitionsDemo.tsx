@@ -1,5 +1,5 @@
 import { AbsoluteFill, Sequence } from "remotion";
-import { FadeSlide, ZoomBlur, Wipe } from "../../../../packages/ui/src/lib/remotion";
+import { FadeSlide, ZoomBlur, Wipe } from "@repo/ui/remotion";
 
 const DemoCard: React.FC<{ title: string; color: string }> = ({
   title,

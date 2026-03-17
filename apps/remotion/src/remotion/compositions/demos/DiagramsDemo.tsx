@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { FlowChart, Tree, Timeline, ComparisonTable } from "../../../../packages/ui/src/lib/remotion";
+import { FlowChart, Tree, Timeline, ComparisonTable } from "@repo/ui/remotion";
 
 export const DiagramsDemo: React.FC = () => {
   const flowChartNodes = [

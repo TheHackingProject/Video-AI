@@ -5,7 +5,7 @@ import {
   Badge,
   ProgressBar,
   SceneHeader,
-} from "../../../../packages/ui/src/lib/remotion";
+} from "@repo/ui/remotion";
 
 export const UIDemo: React.FC = () => {
   return (

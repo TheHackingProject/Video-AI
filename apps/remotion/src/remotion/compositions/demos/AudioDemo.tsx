@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { Spectrum, Waveform, AudioBar } from "../../../../packages/ui/src/lib/remotion";
+import { Spectrum, Waveform, AudioBar } from "@repo/ui/remotion";
 
 export const AudioDemo: React.FC = () => {
   return (

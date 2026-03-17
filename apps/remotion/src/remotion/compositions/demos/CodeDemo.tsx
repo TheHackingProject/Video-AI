@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { CodeBlock, Terminal, DiffView } from "../../../../packages/ui/src/lib/remotion";
+import { CodeBlock, Terminal, DiffView } from "@repo/ui/remotion";
 
 export const CodeDemo: React.FC = () => {
   const sampleCode = `function greet(name: string) {

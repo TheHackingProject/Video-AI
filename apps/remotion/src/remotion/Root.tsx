@@ -1,7 +1,7 @@
-import "./index.css";
+import "../index.css";
 import { Composition } from "remotion";
-import { MyComposition } from "./Composition";
 import {
+  MyComposition,
   TextDemo,
   CodeDemo,
   AudioDemo,
@@ -10,7 +10,7 @@ import {
   DiagramsDemo,
   CharactersDemo,
   TransitionsDemo,
-} from "./demos";
+} from "./compositions/demos";
 
 export const RemotionRoot: React.FC = () => {
   return (

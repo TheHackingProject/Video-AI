@@ -1,3 +1,4 @@
+export { MyComposition } from "./MyComposition";
 export { TextDemo } from "./TextDemo";
 export { CodeDemo } from "./CodeDemo";
 export { AudioDemo } from "./AudioDemo";
