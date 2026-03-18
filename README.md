@@ -1,173 +1,87 @@
 # Video-AI
 
-Turborepo monorepo for video applications and content.
+Monorepo and tooling to **produce and evolve pedagogical videos** for [The Hacking Project](https://www.thehackingproject.org/) (THP). Pipeline: [Remotion](https://www.remotion.dev/) compositions → render → integration on the THP platform. Primary audience: THP learners (web dev courses); secondary: team and contributors.
+
+## Quick start
+
+```sh
+git clone --recurse-submodules <repo-url>
+cd Video-AI
+bun install
+bun run dev --filter=remotion
+```
+
+Remotion Studio opens to preview and edit compositions. For the full workflow (idea → script → composition → review → render), see [KM/Docs/runbooks/video-ai-development.md](KM/Docs/runbooks/video-ai-development.md).
 
 ## Documentation
 
-Documentation organized using the [Diataxis](https://diataxis.fr/) framework.
+Documentation is organized with the [Diataxis](https://diataxis.fr/) framework in **KM/Docs** (submodule).
 
-| Category | Link | Description |
+| Resource | Link | Description |
 |----------|------|-------------|
-| **Home** | [KM/Docs/Home.md](KM/Docs/Home.md) | Main entry point (MOC) |
-| **Tutorial** | [getting-started](KM/Docs/tutorials/getting-started.md) | First steps with Video-AI |
-| **How-to** | [KM/Docs/how-to/](KM/Docs/how-to/) | [monorepo](KM/Docs/how-to/monorepo.md) · [bun-biome](KM/Docs/how-to/bun-biome.md) · [storybook](KM/Docs/how-to/storybook.md) · [remotion](KM/Docs/how-to/remotion.md) |
-| **Reference** | [KM/Docs/reference/](KM/Docs/reference/) | [architecture](KM/Docs/reference/architecture.md) · [cli-commands](KM/Docs/reference/cli-commands.md) · [remotion-components](KM/Docs/reference/remotion-components.md) |
-| **Explanation** | [monorepo-choices](KM/Docs/explanation/monorepo-choices.md) | Why Turborepo, Bun, Biome? |
+| **Knowledge Base** | [KM/Docs/Readme.md](KM/Docs/Readme.md) | Project doc entry point |
+| **Index** | [KM/Docs/01-index.md](KM/Docs/01-index.md) | Full index (architecture, runbooks, templates) |
+| **Architecture** | [KM/Docs/00-architecture.md](KM/Docs/00-architecture.md) | Directory tree, UI vs Remotion, repositories |
+| **Video-AI** | [video-lifecycle](KM/Docs/reference/video-lifecycle.md) · [vision](KM/Docs/explanation/video-ai-vision.md) | Canonical reference, lifecycle, vision v1/v2/v3 |
+| **Runbooks** | [monorepo](KM/Docs/runbooks/monorepo.md) · [remotion](KM/Docs/runbooks/remotion.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) | Procedures (Turborepo, Remotion, Bun/Biome, Storybook) |
 
-## Using this example
+## Monorepo contents
 
-Run the following command:
+Stack: **Turborepo**, **Bun** (package manager), **Biome** (lint/format), TypeScript. Workspaces: `apps/*`, `packages/*`.
 
-```sh
-npx create-turbo@latest
-```
+### Apps
 
-## What's inside?
+- **`remotion`** — [Remotion](https://www.remotion.dev/) Studio: create and preview video compositions (registered under `apps/remotion/src/remotion/compositions/`).
+- **`storybook`** — [Storybook](https://storybook.js.org/): documentation for the static UI component library.
 
-This Turborepo includes the following packages/apps:
+*(Other apps, e.g. `docs` / `web` Next.js, may be added; see [00-architecture](KM/Docs/00-architecture.md).)*
 
-### Apps and Packages
+### Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `storybook`: [Storybook](https://storybook.js.org/) for component library documentation
-- `remotion`: [Remotion](https://www.remotion.dev/) Studio for video generation
-- `@repo/ui`: React component library shared by apps (includes Remotion components in `lib/remotion/`)
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **`@repo/ui`** — Static design system (button, card, code, etc.) + Remotion components in `lib/remotion/` (migrating to `remotion-lib`).
+- **`@repo/remotion-lib`** — Reusable animated primitives and blocks for compositions.
+- **`@repo/eslint-config`** — Shared ESLint configurations.
+- **`@repo/typescript-config`** — Shared `tsconfig.json`s.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Detailed rules (UI vs Remotion, where to put compositions and primitives): [KM/Docs/00-architecture.md](KM/Docs/00-architecture.md#ui-vs-remotion).
 
-### Utilities
+### Submodules
 
-This Turborepo has some additional tools already setup for you:
+- **KM/Docs** — Project documentation (this README points to it).
+- **KM/Course/** — Course content (Intro, Fullstack, React).
+- **packages/skills/Remotion** — Remotion agent skills (remotion-dev/skills).
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+For a full clone: `git clone --recurse-submodules <repo-url>`. If already cloned: `git submodule update --init --recursive`.
 
-### Build
+## Stack and tools
 
-To build all apps and packages, run the following command:
+- **Package manager**: [Bun](https://bun.sh/) (`packageManager` in root `package.json`).
+- **Lint / format**: [Biome](https://biomejs.dev/) (root); `format` script still uses Prettier for part of formatting.
+- **TypeScript**: static typing across the monorepo.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+## Main commands
 
-```sh
-cd my-turborepo
-turbo build
-```
+From the repo root (Video-AI):
 
-Without global `turbo`, use your package manager:
+| Action | Command |
+|--------|---------|
+| Install | `bun install` |
+| Build all | `bun run build` |
+| Dev all | `bun run dev` |
+| Dev Remotion only | `bun run dev --filter=remotion` |
+| Dev Storybook only | `bun run dev --filter=storybook` |
+| Lint | `bun run lint` |
+| Type check | `bun run check-types` |
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+With global Turbo: `turbo build`, `turbo dev --filter=remotion`, etc. Details: [KM/Docs/runbooks/monorepo.md](KM/Docs/runbooks/monorepo.md).
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## Useful links
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+**Project**
 
-```sh
-turbo build --filter=docs
-```
+- [Architecture](KM/Docs/00-architecture.md) · [Doc index](KM/Docs/01-index.md) · [Monorepo runbook](KM/Docs/runbooks/monorepo.md) · [Remotion runbook](KM/Docs/runbooks/remotion.md)
+- [Video lifecycle](KM/Docs/reference/video-lifecycle.md) · [Vision v1/v2/v3](KM/Docs/explanation/video-ai-vision.md)
 
-Without global `turbo`:
+**Turborepo**
 
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks) · [Caching](https://turborepo.dev/docs/crafting-your-repository/caching) · [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) · [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters) · [Configuration](https://turborepo.dev/docs/reference/configuration) · [CLI](https://turborepo.dev/docs/reference/command-line-reference)
