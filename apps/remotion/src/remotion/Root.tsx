@@ -11,6 +11,7 @@ import {
   CharactersDemo,
   TransitionsDemo,
 } from "./compositions/demos";
+import { Pilot01Prerequis } from "./compositions/serie-01";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -92,6 +93,16 @@ export const RemotionRoot: React.FC = () => {
         id="TransitionsDemo"
         component={TransitionsDemo}
         durationInFrames={270}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Série 01 – Git & GitHub */}
+      <Composition
+        id="Pilot01Prerequis"
+        component={Pilot01Prerequis}
+        durationInFrames={5400}
         fps={30}
         width={1920}
         height={1080}
