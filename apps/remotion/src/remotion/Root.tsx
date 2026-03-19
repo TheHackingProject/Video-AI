@@ -1,4 +1,5 @@
 import "../index.css";
+import { demoShowcaseDuration } from "@repo/ui/remotion";
 import { Composition } from "remotion";
 import {
   MyComposition,
@@ -10,6 +11,7 @@ import {
   DiagramsDemo,
   CharactersDemo,
   TransitionsDemo,
+  DemoShowcaseSolarpunkDemo,
 } from "./compositions/demos";
 import { Pilot01Prerequis } from "./compositions/serie-01";
 
@@ -103,6 +105,16 @@ export const RemotionRoot: React.FC = () => {
         id="Pilot01Prerequis"
         component={Pilot01Prerequis}
         durationInFrames={5400}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Demo - Solarpunk showcase (@repo/ui DemoShowcaseSolarpunk + demo-showcase config) */}
+      <Composition
+        id="DemoShowcaseSolarpunk"
+        component={DemoShowcaseSolarpunkDemo}
+        durationInFrames={demoShowcaseDuration}
         fps={30}
         width={1920}
         height={1080}

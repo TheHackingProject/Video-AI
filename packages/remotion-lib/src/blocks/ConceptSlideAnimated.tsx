@@ -18,7 +18,11 @@ export function ConceptSlideAnimated({
   durationInFrames = 15,
 }: ConceptSlideAnimatedProps): React.ReactElement {
   return (
-    <FadeIn startFrame={startFrame} durationInFrames={durationInFrames}>
+    <FadeIn
+      startFrame={startFrame}
+      durationInFrames={durationInFrames}
+      translateY={18}
+    >
       <ConceptSlide title={title} body={body} callout={callout} />
     </FadeIn>
   );

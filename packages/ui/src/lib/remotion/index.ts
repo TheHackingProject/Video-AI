@@ -48,5 +48,13 @@ export { useSpringAnimation } from "./hooks/useSpringAnimation";
 export { useAudioData } from "./hooks/useAudioData";
 
 // Theme and utils
-export { defaultTheme, type Theme } from "./theme";
+export { defaultTheme, solarTheme, type Theme } from "./theme";
 export * from "./utils/animations";
+
+// Demo showcase composition (timing + solarpunk palette)
+export {
+  COLORS as demoShowcaseColors,
+  DEMO_DURATION as demoShowcaseDuration,
+  FPS as demoShowcaseFps,
+  SCENES as demoShowcaseScenes,
+} from "./demo-showcase/config";

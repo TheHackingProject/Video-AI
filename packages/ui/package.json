@@ -14,6 +14,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "remotion": "4.0.434",
     "@storybook/react": "^10.2.17",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",

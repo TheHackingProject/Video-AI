@@ -14,7 +14,11 @@ export function SectionIntroAnimated({
   durationInFrames = 15,
 }: SectionIntroAnimatedProps): React.ReactElement {
   return (
-    <FadeIn startFrame={startFrame} durationInFrames={durationInFrames}>
+    <FadeIn
+      startFrame={startFrame}
+      durationInFrames={durationInFrames}
+      translateY={18}
+    >
       <SectionIntro text={text} />
     </FadeIn>
   );

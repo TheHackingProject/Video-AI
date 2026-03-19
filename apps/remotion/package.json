@@ -8,6 +8,7 @@
   "dependencies": {
     "@remotion/cli": "4.0.434",
     "@repo/remotion-lib": "*",
+    "@repo/theme": "*",
     "@repo/ui": "*",
     "react": "19.2.3",
     "react-dom": "19.2.3",

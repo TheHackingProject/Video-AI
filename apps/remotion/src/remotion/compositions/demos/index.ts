@@ -7,3 +7,4 @@ export { UIDemo } from "./UIDemo";
 export { DiagramsDemo } from "./DiagramsDemo";
 export { CharactersDemo } from "./CharactersDemo";
 export { TransitionsDemo } from "./TransitionsDemo";
+export { DemoShowcaseSolarpunkDemo } from "./DemoShowcaseSolarpunkDemo";

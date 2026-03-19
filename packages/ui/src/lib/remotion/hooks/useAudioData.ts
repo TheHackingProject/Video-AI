@@ -29,9 +29,9 @@ export const useAudioData = ({
   }
 
   const volume = bands.reduce((a, b) => a + b, 0) / bands.length;
-  const bass = (bands[0] + bands[1]) / 2;
-  const mid = (bands[2] + bands[3] + bands[4]) / 3;
-  const treble = (bands[5] + bands[6] + bands[7]) / 3;
+  const bass = ((bands[0] ?? 0) + (bands[1] ?? 0)) / 2;
+  const mid = ((bands[2] ?? 0) + (bands[3] ?? 0) + (bands[4] ?? 0)) / 3;
+  const treble = ((bands[5] ?? 0) + (bands[6] ?? 0) + (bands[7] ?? 0)) / 3;
 
   return {
     bands,

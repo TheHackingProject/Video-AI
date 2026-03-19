@@ -18,6 +18,7 @@
         "@remotion/cli": "4.0.434",
         "@remotion/tailwind-v4": "4.0.434",
         "@repo/remotion-lib": "*",
+        "@repo/theme": "*",
         "@repo/ui": "*",
         "react": "19.2.3",
         "react-dom": "19.2.3",
@@ -100,6 +101,10 @@
         "remotion": ">=4.0.0",
       },
     },
+    "packages/theme": {
+      "name": "@repo/theme",
+      "version": "0.0.0",
+    },
     "packages/typescript-config": {
       "name": "@repo/typescript-config",
       "version": "0.0.0",
@@ -119,6 +124,7 @@
         "@types/react": "19.2.2",
         "@types/react-dom": "19.2.2",
         "eslint": "^9.39.1",
+        "remotion": "4.0.434",
         "typescript": "5.9.2",
       },
       "peerDependencies": {
@@ -441,6 +447,8 @@
     "@repo/eslint-config": ["@repo/eslint-config@workspace:packages/eslint-config"],
 
     "@repo/remotion-lib": ["@repo/remotion-lib@workspace:packages/remotion-lib"],
+
+    "@repo/theme": ["@repo/theme@workspace:packages/theme"],
 
     "@repo/typescript-config": ["@repo/typescript-config@workspace:packages/typescript-config"],
 
@@ -1707,6 +1715,8 @@
     "@remotion/zod-types/remotion": ["remotion@4.0.434", "", { "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-r5SRjrB9lFeZPkNGTcFG0qJJOhV7m/W/xandMvReCZyvV8D3ScmfpJWqRoq/zGzBt6t2F6TW/3sUQ0QTU110ZQ=="],
 
     "@repo/eslint-config/typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+
+    "@repo/ui/remotion": ["remotion@4.0.434", "", { "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-r5SRjrB9lFeZPkNGTcFG0qJJOhV7m/W/xandMvReCZyvV8D3ScmfpJWqRoq/zGzBt6t2F6TW/3sUQ0QTU110ZQ=="],
 
     "@rollup/pluginutils/estree-walker": ["estree-walker@2.0.2", "", {}, "sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w=="],
 
