@@ -7,6 +7,7 @@ import {
   solarTheme,
 } from "@repo/ui/remotion";
 import type { ThpLucideSlug } from "@repo/ui/icons";
+import type { SchematicLink } from "@repo/ui/schematic-flow-chart-view";
 
 const schematicNodes: {
   id: string;
@@ -38,6 +39,14 @@ const schematicNodes: {
     subtitle: "Catalogue + checklist",
     iconSlug: "sparkle",
   },
+];
+
+/** Right → down → left → up loop; grid follows `links` (see schematic-flow-geometry). */
+const schematicCycleLinks: SchematicLink[] = [
+  { from: 0, to: 1, direction: "right" },
+  { from: 1, to: 2, direction: "down" },
+  { from: 2, to: 3, direction: "left" },
+  { from: 3, to: 0, direction: "up" },
 ];
 
 export const DiagramsDemo: React.FC = () => {
@@ -93,10 +102,12 @@ export const DiagramsDemo: React.FC = () => {
     >
       <div>
         <p style={{ color: "#888", fontSize: 14, marginBottom: 12 }}>
-          SchematicFlowChart — text, Lucide, arrows (see Storybook)
+          SchematicFlowChart — cycle 4 directions (graph via <code>links</code>)
         </p>
         <FlowChart
           nodes={schematicNodes}
+          links={schematicCycleLinks}
+          graphCell={{ cardWidth: 168, cardHeight: 86, gap: 40 }}
           startFrame={0}
           nodeDelay={22}
           theme={solarTheme}

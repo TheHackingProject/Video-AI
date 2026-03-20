@@ -5,6 +5,7 @@ import { defaultTheme, type Theme } from "../theme";
 import { springConfigs } from "../utils/animations";
 import {
   SchematicFlowChartView,
+  type SchematicLink,
   type SchematicPalette,
 } from "../../diagrams/SchematicFlowChartView";
 
@@ -21,8 +22,16 @@ interface FlowChartProps {
   nodes: FlowNode[];
   startFrame?: number;
   nodeDelay?: number;
+  /** Flex mode only. Ignored when `links` is set. */
   direction?: "horizontal" | "vertical";
   showArrows?: boolean;
+  /**
+   * Graph mode: edges between node indices (order matches `nodes`).
+   * `arrowProgress` length must match `links.length`.
+   */
+  links?: SchematicLink[];
+  /** Optional pixel layout overrides in graph mode (`links` set). */
+  graphCell?: { cardWidth?: number; cardHeight?: number; gap?: number };
   theme?: Theme;
   style?: CSSProperties;
 }
@@ -56,6 +65,8 @@ export const FlowChart: FC<FlowChartProps> = ({
   nodeDelay = 24,
   direction = "horizontal",
   showArrows = true,
+  links,
+  graphCell,
   theme = defaultTheme,
   style,
 }) => {
@@ -71,8 +82,14 @@ export const FlowChart: FC<FlowChartProps> = ({
     });
   });
 
-  const arrowProgress = nodes.slice(0, -1).map((_, index) => {
-    const arrowStart = startFrame + index * nodeDelay + nodeDelay * 0.55;
+  const linkList = links ?? [];
+  const isGraph = linkList.length > 0;
+  const arrowCount = isGraph ? linkList.length : Math.max(0, nodes.length - 1);
+  const arrowProgress = Array.from({ length: arrowCount }, (_, index) => {
+    const arrowStart =
+      startFrame +
+      index * nodeDelay +
+      nodeDelay * (isGraph ? 0.45 : 0.55);
     return spring({
       frame: frame - arrowStart,
       fps,
@@ -87,6 +104,8 @@ export const FlowChart: FC<FlowChartProps> = ({
       showArrows={showArrows}
       nodeProgress={nodeProgress}
       arrowProgress={arrowProgress}
+      links={isGraph ? linkList : undefined}
+      graphCell={graphCell}
       palette={themeToPalette(theme)}
       style={style}
     />
