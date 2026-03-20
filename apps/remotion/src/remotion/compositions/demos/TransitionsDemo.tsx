@@ -26,7 +26,7 @@ export const TransitionsDemo: React.FC = () => {
         backgroundColor: "#0f0f0f",
       }}
     >
-      <Sequence from={0} durationInFrames={90}>
+      <Sequence durationInFrames={90}>
         <AbsoluteFill
           style={{
             display: "flex",

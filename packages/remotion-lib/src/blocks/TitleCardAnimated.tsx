@@ -7,6 +7,8 @@ export interface TitleCardAnimatedProps {
   subtitle?: string;
   startFrame?: number;
   durationInFrames?: number;
+  titleColor?: string;
+  subtitleColor?: string;
 }
 
 export function TitleCardAnimated({
@@ -14,6 +16,8 @@ export function TitleCardAnimated({
   subtitle,
   startFrame = 0,
   durationInFrames = 15,
+  titleColor,
+  subtitleColor,
 }: TitleCardAnimatedProps): React.ReactElement {
   return (
     <FadeIn
@@ -21,7 +25,12 @@ export function TitleCardAnimated({
       durationInFrames={durationInFrames}
       translateY={24}
     >
-      <TitleCard title={title} subtitle={subtitle} />
+      <TitleCard
+        title={title}
+        subtitle={subtitle}
+        titleColor={titleColor}
+        subtitleColor={subtitleColor}
+      />
     </FadeIn>
   );
 }

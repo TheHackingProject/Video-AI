@@ -16,6 +16,8 @@ export interface CodeAlongStepProps {
   showLineNumbers?: boolean;
   title?: string;
   fadeInDuration?: number;
+  /** Passed to SectionIntro (e.g. Solarpunk text on dark gradient). */
+  introTextColor?: string;
 }
 
 export function CodeAlongStep({
@@ -25,6 +27,7 @@ export function CodeAlongStep({
   showLineNumbers = true,
   title,
   fadeInDuration = 10,
+  introTextColor,
 }: CodeAlongStepProps): React.ReactElement {
   const frame = useCurrentFrame();
   const progress = frame - startFrame;
@@ -59,7 +62,7 @@ export function CodeAlongStep({
       }}
     >
       <div style={{ width: "100%" }}>
-        <SectionIntro text={step.label} />
+        <SectionIntro text={step.label} textColor={introTextColor} />
       </div>
       <div style={{ width: "100%" }}>
         <CodeBlockStatic

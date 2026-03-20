@@ -1,15 +1,44 @@
 import type React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
 import {
   TitleCardAnimated,
   SectionIntroAnimated,
-  CodeAlongStep,
 } from "@repo/remotion-lib";
-import { Terminal } from "@repo/ui/remotion";
+import {
+  FlowChart,
+  ParticleField,
+  ProgressBar,
+  SceneHeader,
+  Terminal,
+  demoShowcaseColors,
+  solarTheme,
+  type Theme,
+} from "@repo/ui/remotion";
+import { CodeBlockStatic } from "@repo/ui/code-block-static";
+import { ThpGitBranch, ThpMonitor, ThpTerminal } from "@repo/ui/icons";
+import {
+  CTA_SUBTITLE,
+  CTA_TITLE,
+  INTRO_HOOK,
+  INTRO_OBJECTIVE,
+  LESSON_STEP_LABELS,
+  OS_PILLS,
+  RECAP_TEXT,
+  STEP1_ANALOGY,
+  STEP1_CODE,
+  STEP1_OS_LINE,
+  STEP2_BODY,
+  STEP3_BODY,
+  SUBTITLE,
+  TERMINAL_LS_LINES,
+  TERMINAL_PROMPT,
+  TERMINAL_PWD_LINES,
+  TERMINAL_TYPE_SPEED,
+  TITLE,
+} from "./pilot01-content";
 
 const FPS = 30;
 
-/** Durations aligned with KM/Docs/video-ai-preparation/pilot-01-prerequis-outline.md (~120 s @ 30 fps). */
 const SCENE_DURATIONS = {
   title: 5 * FPS,
   intro: 14 * FPS,
@@ -18,7 +47,9 @@ const SCENE_DURATIONS = {
   step3: 26 * FPS,
   recap: 12 * FPS,
   cta: 5 * FPS,
-};
+} as const;
+
+const INTRO_HALF = Math.floor(SCENE_DURATIONS.intro / 2);
 
 const FRAME = {
   title: 0,
@@ -48,141 +79,415 @@ const FRAME = {
     SCENE_DURATIONS.recap,
 };
 
-const STEP1_LABEL =
-  "Le terminal, c'est une fenêtre où tu tapes des commandes. Sur Mac : cherche Terminal dans le Spotlight. Sur Linux : Ctrl+Alt+T ou cherche Terminal dans le menu. Sur Windows : PowerShell, ou installe WSL / Git Bash.";
-
-const STEP1_CODE = `# Ouvrir le terminal
-# Mac : Spotlight → "Terminal"
-# Linux : Ctrl+Alt+T
-# Windows : PowerShell ou Git Bash`;
-
-const STEP2_LABEL =
-  "Une fois le terminal ouvert, tape pwd puis Entrée. P-W-D veut dire « print working directory » : ça affiche le dossier dans lequel tu te trouves.";
-
-const STEP2_LINES = [
-  { type: "command" as const, text: "pwd" },
-  { type: "output" as const, text: "/Users/toto/projets" },
+const PREMOUNT = FPS;
+const tc = solarTheme.colors;
+const particleColors = [
+  tc.primary,
+  tc.secondary,
+  tc.accent,
+  tc.success,
 ];
 
-const STEP3_LABEL =
-  "Pour voir le contenu du dossier actuel, tape ls puis Entrée. Sur Windows PowerShell tu peux utiliser dir. Tu obtiens la liste des fichiers et dossiers.";
-
-const STEP3_LINES = [
-  { type: "command" as const, text: "ls" },
-  { type: "output" as const, text: "README.md  src  package.json" },
-];
-
-const RECAP_TEXT =
-  "Tu as ouvert le terminal et utilisé pwd et ls. Tu es prêt pour suivre les prochaines vidéos en ligne de commande.";
-
-const TERMINAL_TYPE_SPEED = 2;
-
-export const Pilot01Prerequis: React.FC = () => {
+function LessonStepsFooter({
+  activeStep,
+  theme,
+}: {
+  activeStep: 1 | 2 | 3;
+  theme: Theme;
+}): React.ReactElement {
   return (
-    <AbsoluteFill
+    <div
       style={{
-        backgroundColor: "#0d1117",
+        position: "absolute",
+        bottom: 76,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        gap: theme.spacing.sm,
+        zIndex: 8,
+        pointerEvents: "none",
       }}
     >
-      <Sequence from={FRAME.title} durationInFrames={SCENE_DURATIONS.title}>
-        <TitleCardAnimated
-          title="Pré-requis : terminal et bases"
-          subtitle="Pour suivre les démos Git"
-          startFrame={FRAME.title}
-          durationInFrames={20}
-        />
-      </Sequence>
+      {LESSON_STEP_LABELS.map((label, i) => {
+        const n = (i + 1) as 1 | 2 | 3;
+        const on = n <= activeStep;
+        return (
+          <div
+            key={label}
+            style={{
+              padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
+              borderRadius: theme.borderRadius.md,
+              border: `1px solid ${theme.colors.textDark}`,
+              backgroundColor: n === activeStep ? `${theme.colors.primary}40` : "transparent",
+              color: on ? theme.colors.text : theme.colors.textMuted,
+              fontFamily: theme.fonts.body,
+              fontSize: theme.fontSizes.sm,
+              fontWeight: n === activeStep ? 600 : 400,
+            }}
+          >
+            {n}/3 · {label}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
-      <Sequence from={FRAME.intro} durationInFrames={SCENE_DURATIONS.intro}>
-        <SectionIntroAnimated
-          text="Dans les prochaines vidéos on va utiliser Git en ligne de commande. On va voir où ouvrir le terminal et une ou deux commandes de base."
-          startFrame={FRAME.intro}
-          durationInFrames={20}
-        />
-      </Sequence>
-
-      <Sequence from={FRAME.step1} durationInFrames={SCENE_DURATIONS.step1}>
-        <CodeAlongStep
-          steps={[{ label: STEP1_LABEL, code: STEP1_CODE }]}
-          startFrame={FRAME.step1}
-          durationPerStep={SCENE_DURATIONS.step1}
-          showLineNumbers={false}
-          title="terminal"
-          fadeInDuration={20}
-        />
-      </Sequence>
-
-      <Sequence from={FRAME.step2} durationInFrames={SCENE_DURATIONS.step2}>
+function OsPillsRow({ theme }: { theme: Theme }): React.ReactElement {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: theme.spacing.md,
+        marginTop: theme.spacing.md,
+        marginBottom: theme.spacing.md,
+      }}
+    >
+      {OS_PILLS.map((pill) => (
         <div
+          key={pill.id}
           style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            padding: 48,
-            gap: 32,
-            height: "100%",
+            gap: theme.spacing.sm,
+            padding: `${theme.spacing.sm}px ${theme.spacing.lg}px`,
+            borderRadius: theme.borderRadius.lg,
+            border: `1px solid ${theme.colors.secondary}80`,
+            backgroundColor: `${theme.colors.backgroundLight}cc`,
           }}
         >
-          <SectionIntroAnimated
-            text={STEP2_LABEL}
-            startFrame={FRAME.step2}
-            durationInFrames={20}
-          />
-          <div style={{ width: "100%", maxWidth: 640 }}>
-            <Terminal
-              lines={STEP2_LINES}
-              title="terminal"
-              startFrame={FRAME.step2}
-              typeSpeed={TERMINAL_TYPE_SPEED}
-            />
+          <ThpMonitor size={22} color={theme.colors.secondary} strokeWidth={2} aria-hidden />
+          <div style={{ textAlign: "left" }}>
+            <div
+              style={{
+                fontFamily: theme.fonts.title,
+                fontSize: theme.fontSizes.md,
+                color: theme.colors.text,
+                fontWeight: 600,
+              }}
+            >
+              {pill.label}
+            </div>
+            <div
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textMuted,
+                maxWidth: 200,
+              }}
+            >
+              {pill.hint}
+            </div>
           </div>
         </div>
+      ))}
+    </div>
+  );
+}
+
+export const Pilot01Prerequis: React.FC = () => {
+  const { width, height, durationInFrames } = useVideoConfig();
+
+  const bgGradient = `radial-gradient(ellipse at center, ${demoShowcaseColors.backgroundGlow} 0%, ${tc.background} 72%, #030806 100%)`;
+
+  return (
+    <AbsoluteFill style={{ background: bgGradient }}>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          opacity: 0.2,
+          pointerEvents: "none",
+        }}
+      >
+        <ParticleField
+          width={width}
+          height={height}
+          count={42}
+          speed={0.18}
+          theme={solarTheme}
+          colors={particleColors}
+        />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 25,
+          pointerEvents: "none",
+        }}
+      >
+        <ProgressBar
+          theme={solarTheme}
+          totalFrames={durationInFrames}
+          showTime
+          showPercentage={false}
+          height={5}
+        />
+      </div>
+
+      <Sequence from={FRAME.title} durationInFrames={SCENE_DURATIONS.title} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <TitleCardAnimated
+            title={TITLE}
+            subtitle={SUBTITLE}
+            startFrame={0}
+            durationInFrames={24}
+            titleColor={tc.text}
+            subtitleColor={tc.textMuted}
+          />
+        </AbsoluteFill>
       </Sequence>
 
-      <Sequence from={FRAME.step3} durationInFrames={SCENE_DURATIONS.step3}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 48,
-            gap: 32,
-            height: "100%",
-          }}
-        >
-          <SectionIntroAnimated
-            text={STEP3_LABEL}
-            startFrame={FRAME.step3}
-            durationInFrames={20}
+      <Sequence from={FRAME.intro} durationInFrames={SCENE_DURATIONS.intro} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <SceneHeader
+            sceneNumber={1}
+            totalScenes={5}
+            keyword="INTRO"
+            startFrame={0}
+            theme={solarTheme}
           />
-          <div style={{ width: "100%", maxWidth: 640 }}>
-            <Terminal
-              lines={STEP3_LINES}
-              title="terminal"
-              startFrame={FRAME.step3}
-              typeSpeed={TERMINAL_TYPE_SPEED}
+          <Sequence durationInFrames={INTRO_HALF} layout="none">
+            <SectionIntroAnimated
+              text={INTRO_HOOK}
+              startFrame={0}
+              durationInFrames={22}
+              textColor={tc.text}
+            />
+          </Sequence>
+          <Sequence from={INTRO_HALF} durationInFrames={SCENE_DURATIONS.intro - INTRO_HALF} layout="none">
+            <SectionIntroAnimated
+              text={INTRO_OBJECTIVE}
+              startFrame={0}
+              durationInFrames={22}
+              textColor={tc.text}
+            />
+          </Sequence>
+        </AbsoluteFill>
+      </Sequence>
+
+      <Sequence from={FRAME.step1} durationInFrames={SCENE_DURATIONS.step1} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <SceneHeader
+            sceneNumber={2}
+            totalScenes={5}
+            keyword="OUVRIR"
+            startFrame={0}
+            theme={solarTheme}
+          />
+          <LessonStepsFooter activeStep={1} theme={solarTheme} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              paddingTop: 100,
+              paddingLeft: 48,
+              paddingRight: 48,
+              height: "100%",
+              overflow: "hidden",
+            }}
+          >
+            <SectionIntroAnimated
+              text={STEP1_ANALOGY}
+              startFrame={0}
+              durationInFrames={24}
+              textColor={tc.text}
+            />
+            <OsPillsRow theme={solarTheme} />
+            <SectionIntroAnimated
+              text={STEP1_OS_LINE}
+              startFrame={36}
+              durationInFrames={22}
+              textColor={tc.textMuted}
+            />
+            <div style={{ width: "100%", maxWidth: 720, marginTop: 16 }}>
+              <CodeBlockStatic code={STEP1_CODE} showLineNumbers={false} title="terminal" />
+            </div>
+          </div>
+        </AbsoluteFill>
+      </Sequence>
+
+      <Sequence from={FRAME.step2} durationInFrames={SCENE_DURATIONS.step2} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <SceneHeader
+            sceneNumber={3}
+            totalScenes={5}
+            keyword="PWD"
+            startFrame={0}
+            theme={solarTheme}
+          />
+          <LessonStepsFooter activeStep={2} theme={solarTheme} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 48,
+              gap: 20,
+              height: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+                maxWidth: 880,
+              }}
+            >
+              <ThpTerminal size={36} color={tc.primary} strokeWidth={2} aria-hidden />
+              <div style={{ flex: 1 }}>
+                <SectionIntroAnimated
+                  text={STEP2_BODY}
+                  startFrame={0}
+                  durationInFrames={26}
+                  textColor={tc.text}
+                />
+              </div>
+            </div>
+            <div style={{ width: "100%", maxWidth: 640 }}>
+              <Terminal
+                lines={TERMINAL_PWD_LINES}
+                title="terminal"
+                startFrame={12}
+                typeSpeed={TERMINAL_TYPE_SPEED}
+                prompt={TERMINAL_PROMPT}
+                theme={solarTheme}
+              />
+            </div>
+          </div>
+        </AbsoluteFill>
+      </Sequence>
+
+      <Sequence from={FRAME.step3} durationInFrames={SCENE_DURATIONS.step3} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <SceneHeader
+            sceneNumber={4}
+            totalScenes={5}
+            keyword="LS"
+            startFrame={0}
+            theme={solarTheme}
+          />
+          <LessonStepsFooter activeStep={3} theme={solarTheme} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 48,
+              gap: 20,
+              height: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+                maxWidth: 880,
+              }}
+            >
+              <ThpTerminal size={36} color={tc.secondary} strokeWidth={2} aria-hidden />
+              <div style={{ flex: 1 }}>
+                <SectionIntroAnimated
+                  text={STEP3_BODY}
+                  startFrame={0}
+                  durationInFrames={26}
+                  textColor={tc.text}
+                />
+              </div>
+            </div>
+            <div style={{ width: "100%", maxWidth: 640 }}>
+              <Terminal
+                lines={TERMINAL_LS_LINES}
+                title="terminal"
+                startFrame={12}
+                typeSpeed={TERMINAL_TYPE_SPEED}
+                prompt={TERMINAL_PROMPT}
+                theme={solarTheme}
+              />
+            </div>
+          </div>
+        </AbsoluteFill>
+      </Sequence>
+
+      <Sequence from={FRAME.recap} durationInFrames={SCENE_DURATIONS.recap} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <SceneHeader
+            sceneNumber={5}
+            totalScenes={5}
+            keyword="RÉCAP"
+            startFrame={0}
+            theme={solarTheme}
+          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 48,
+              gap: 28,
+              height: "100%",
+            }}
+          >
+            <SectionIntroAnimated
+              text={RECAP_TEXT}
+              startFrame={0}
+              durationInFrames={22}
+              textColor={tc.text}
+            />
+            <FlowChart
+              nodes={[
+                { id: "1", label: "Terminal", icon: "▸", color: tc.primary },
+                { id: "2", label: "pwd", icon: "📍", color: tc.accent },
+                { id: "3", label: "ls", icon: "📂", color: tc.secondary },
+                { id: "4", label: "Prêt", icon: "✓", color: tc.success },
+              ]}
+              startFrame={18}
+              nodeDelay={12}
+              direction="horizontal"
+              theme={solarTheme}
             />
           </div>
-        </div>
+        </AbsoluteFill>
       </Sequence>
 
-      <Sequence from={FRAME.recap} durationInFrames={SCENE_DURATIONS.recap}>
-        <SectionIntroAnimated
-          text={RECAP_TEXT}
-          startFrame={FRAME.recap}
-          durationInFrames={20}
-        />
-      </Sequence>
-
-      <Sequence from={FRAME.cta} durationInFrames={SCENE_DURATIONS.cta}>
-        <TitleCardAnimated
-          title="À suivre : Git vs GitHub"
-          subtitle="La suite du parcours"
-          startFrame={FRAME.cta}
-          durationInFrames={20}
-        />
+      <Sequence from={FRAME.cta} durationInFrames={SCENE_DURATIONS.cta} premountFor={PREMOUNT}>
+        <AbsoluteFill style={{ zIndex: 1 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              gap: 20,
+            }}
+          >
+            <ThpGitBranch size={48} color={tc.accent} strokeWidth={2} aria-hidden />
+            <TitleCardAnimated
+              title={CTA_TITLE}
+              subtitle={CTA_SUBTITLE}
+              startFrame={0}
+              durationInFrames={18}
+              titleColor={tc.text}
+              subtitleColor={tc.textMuted}
+            />
+          </div>
+        </AbsoluteFill>
       </Sequence>
     </AbsoluteFill>
   );

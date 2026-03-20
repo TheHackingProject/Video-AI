@@ -4,12 +4,18 @@ export interface TitleCardProps {
   title: string;
   subtitle?: string;
   className?: string;
+  /** Override title color (e.g. Solarpunk `solarTheme.colors.text`). */
+  titleColor?: string;
+  /** Override subtitle color (e.g. `solarTheme.colors.textMuted`). */
+  subtitleColor?: string;
 }
 
 export function TitleCard({
   title,
   subtitle,
   className,
+  titleColor = "#f0f6fc",
+  subtitleColor = "#8b949e",
 }: TitleCardProps): JSX.Element {
   return (
     <div
@@ -29,7 +35,7 @@ export function TitleCard({
           margin: 0,
           fontSize: 48,
           fontWeight: 700,
-          color: "#f0f6fc",
+          color: titleColor,
           lineHeight: 1.2,
         }}
       >
@@ -40,7 +46,7 @@ export function TitleCard({
           style={{
             margin: "16px 0 0",
             fontSize: 24,
-            color: "#8b949e",
+            color: subtitleColor,
             fontWeight: 400,
           }}
         >

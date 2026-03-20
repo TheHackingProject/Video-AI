@@ -11,6 +11,7 @@
 import {
   GitBranch,
   Leaf,
+  Monitor,
   Sprout,
   Sparkles,
   Sun,
@@ -38,6 +39,8 @@ export const ThpSparkles = Sparkles;
 export const ThpWaypoints = Waypoints;
 /** Renewable energy accent */
 export const ThpZap = Zap;
+/** OS / machine hint (pills Mac·Linux·Windows) */
+export const ThpMonitor = Monitor;
 
 /** Dynamic pick by slug (Storybook, CMS, etc.) */
 export const THP_LUCIDE_MAP = {
@@ -49,6 +52,7 @@ export const THP_LUCIDE_MAP = {
   sparkle: Sparkles,
   learningPath: Waypoints,
   energy: Zap,
+  monitor: Monitor,
 } as const satisfies Record<string, LucideIcon>;
 
 export type ThpLucideSlug = keyof typeof THP_LUCIDE_MAP;
