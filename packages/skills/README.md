@@ -29,6 +29,10 @@ This initializes `packages/skills/Remotion` and creates **`.cursor/skills/`** sy
 
 **Note:** Cursor **Agent Skills** read `.cursor/skills/`, not `apps/remotion/.agents/`. The `.agents/` paths are for other agent stacks (e.g. Codex) with a different CWD.
 
+### Workflow triggers (THP + Remotion rules)
+
+Canonical **copy-paste prompts** and **task → `rules/*.md`** mapping live in [KM/Docs/runbooks/video-ai-development.md](../../KM/Docs/runbooks/video-ai-development.md) §08 (*Triggers agent*). Use that section with **thp-video-generation**, **thp-solarpunk-visual**, and **remotion-best-practices** on every Remotion implementation pass.
+
 ## Clone / update submodule
 
 ```bash
