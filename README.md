@@ -69,7 +69,7 @@ From the repo root (Video-AI):
 | Build all | `bun run build` |
 | Dev all | `bun run dev` |
 | Dev Remotion only | `bun run dev --filter=remotion` |
-| Dev Storybook only | `bun run dev --filter=storybook` |
+| Dev Storybook only | `bun run storybook` or `bun run dev --filter=storybook` → **http://localhost:6006** (not port 3000) |
 | Lint | `bun run lint` |
 | Type check | `bun run check-types` |
 

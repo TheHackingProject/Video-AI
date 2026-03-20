@@ -104,7 +104,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Pilot01Prerequis"
         component={Pilot01Prerequis}
-        durationInFrames={5400}
+        durationInFrames={3600}
         fps={30}
         width={1920}
         height={1080}

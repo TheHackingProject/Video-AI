@@ -9,14 +9,15 @@ import { Terminal } from "@repo/ui/remotion";
 
 const FPS = 30;
 
+/** Durations aligned with KM/Docs/video-ai-preparation/pilot-01-prerequis-outline.md (~120 s @ 30 fps). */
 const SCENE_DURATIONS = {
-  title: 8 * FPS,
-  intro: 15 * FPS,
-  step1: 45 * FPS,
-  step2: 40 * FPS,
-  step3: 42 * FPS,
-  recap: 20 * FPS,
-  cta: 10 * FPS,
+  title: 5 * FPS,
+  intro: 14 * FPS,
+  step1: 32 * FPS,
+  step2: 26 * FPS,
+  step3: 26 * FPS,
+  recap: 12 * FPS,
+  cta: 5 * FPS,
 };
 
 const FRAME = {
@@ -178,7 +179,7 @@ export const Pilot01Prerequis: React.FC = () => {
       <Sequence from={FRAME.cta} durationInFrames={SCENE_DURATIONS.cta}>
         <TitleCardAnimated
           title="À suivre : Git vs GitHub"
-          subtitle="Une idée en 45 secondes"
+          subtitle="La suite du parcours"
           startFrame={FRAME.cta}
           durationInFrames={20}
         />

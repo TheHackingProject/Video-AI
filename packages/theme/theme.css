@@ -1,3 +1,5 @@
+@import "./solarpunk.tokens.css";
+
 @theme inline {
 	/* Colors used by Tailwind utilities (e.g. `bg-background`, `text-foreground`) */
 	--color-background: var(--background);
@@ -12,39 +14,4 @@
 	/* Font utilities (fallbacks when app does not define --font-geist-*) */
 	--font-sans: var(--font-geist-sans, system-ui, sans-serif);
 	--font-mono: var(--font-geist-mono, ui-monospace, monospace);
-}
-
-/* Default (light) theme tokens */
-:root {
-	--background: #ffffff;
-	--foreground: #171717;
-
-	/* Solarpunk palette defaults (also used by our Remotion default theme) */
-	--primary: #4361ee;
-	--secondary: #7209b7;
-	--accent: #f72585;
-	--success: #06d6a0;
-	--warning: #ffd60a;
-	--error: #ef476f;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
-}
-
-/* Solarpunk theme override.
-   Expected selector: set `data-theme="solarpunk"` on the document root element (`<html>`). */
-:root[data-theme="solarpunk"] {
-	--background: #0a1410;
-	--foreground: #ecfdf5;
-
-	--primary: #22c55e;
-	--secondary: #14b8a6;
-	--accent: #f59e0b;
-	--success: #84cc16;
-	--warning: #fbbf24;
-	--error: #f87171;
 }

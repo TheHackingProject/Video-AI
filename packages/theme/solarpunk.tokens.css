@@ -1,0 +1,20 @@
+/**
+ * THP / Video-AI — Solarpunk semantic tokens (dark only).
+ * Single source for web Tailwind bridge vars. Keep in sync with:
+ * - packages/ui/src/lib/remotion/theme.ts → solarTheme.colors (semantic fields)
+ * - KM/Docs/reference/solarpunk-theme-decisions.md
+ */
+
+:root,
+:root[data-theme="solarpunk"] {
+	--background: #0a1410;
+	--foreground: #ecfdf5;
+
+	--primary: #22c55e;
+	--secondary: #14b8a6;
+	--accent: #f59e0b;
+	--success: #84cc16;
+	--warning: #fbbf24;
+	/* Reserved for errors/alerts only — do not use as decorative accent */
+	--error: #f87171;
+}

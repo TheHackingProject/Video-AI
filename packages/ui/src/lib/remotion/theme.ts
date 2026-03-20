@@ -52,62 +52,10 @@ export interface Theme {
   };
 }
 
-export const defaultTheme: Theme = {
-  colors: {
-    primary: "#4361ee",
-    secondary: "#7209b7",
-    accent: "#f72585",
-    success: "#06d6a0",
-    warning: "#ffd60a",
-    error: "#ef476f",
-    background: "#0d1117",
-    backgroundLight: "#161b22",
-    text: "#f0f6fc",
-    textMuted: "#8b949e",
-    textDark: "#484f58",
-    code: {
-      background: "#0d1117",
-      text: "#c9d1d9",
-      keyword: "#ff7b72",
-      string: "#a5d6ff",
-      comment: "#8b949e",
-      function: "#d2a8ff",
-      variable: "#ffa657",
-    },
-  },
-  fonts: {
-    title: "'Poppins', sans-serif",
-    body: "'Inter', sans-serif",
-    code: "'JetBrains Mono', monospace",
-  },
-  fontSizes: {
-    xs: 14,
-    sm: 16,
-    md: 20,
-    lg: 24,
-    xl: 32,
-    xxl: 48,
-    display: 72,
-  },
-  spacing: {
-    xs: 4,
-    sm: 8,
-    md: 16,
-    lg: 24,
-    xl: 32,
-    xxl: 48,
-  },
-  borderRadius: {
-    sm: 4,
-    md: 8,
-    lg: 12,
-    xl: 16,
-    full: 9999,
-  },
-};
-
-// 🌿 SOLARPUNK DARK THEME
-// Nature meets sustainable tech - lush greens, golden sun, organic curves
+/**
+ * THP / Video-AI canonical Remotion theme (Solarpunk dark).
+ * Keep semantic hex in sync with packages/theme/solarpunk.tokens.css
+ */
 export const solarTheme: Theme = {
   colors: {
     primary: "#22c55e",
@@ -162,3 +110,6 @@ export const solarTheme: Theme = {
     full: 9999,
   },
 };
+
+/** Default for all @repo/ui/remotion components — aliases THP Solarpunk. */
+export const defaultTheme = solarTheme;

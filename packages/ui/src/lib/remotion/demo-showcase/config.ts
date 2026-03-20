@@ -1,6 +1,8 @@
 /**
- * Demo showcase timing and solarpunk palette (migrated from reference zip).
- * Single source of truth for @repo/ui DemoShowcaseSolarpunk composition.
+ * Demo showcase timing and extended Solarpunk palette (accents: leaf, sun, teal…).
+ * Semantic roles (primary, background, error, …) must stay aligned with
+ * packages/theme/solarpunk.tokens.css and theme.ts → solarTheme.
+ * See KM/Docs/reference/solarpunk-theme-decisions.md
  */
 
 export const FPS = 30;
