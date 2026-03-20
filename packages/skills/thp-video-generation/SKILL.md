@@ -1,0 +1,104 @@
+---
+name: thp-video-generation
+description: THP Video-AI pipeline — choose Remotion visuals per block type (text, code, transitions, 3D, diagrams), enforce Storybook-to-demo-to-doc workflow, solarTheme and runbooks. Use when the user authors or reviews THP course videos, Remotion compositions, pilot outlines, block library choice, video title beats, transition order, diagram vs terminal, THP video skill, or visual choice for a lesson.
+category: onboarding
+metadata:
+  tags: thp, video-ai, remotion, solarpunk, storybook, workflow
+---
+
+# THP Video generation (Video-AI monorepo)
+
+Project-specific skill. Pair with **remotion-best-practices** from `packages/skills/Remotion/skills/remotion/SKILL.md` for low-level Remotion rules.
+
+## When to use
+
+- New or refactored **composition** under `apps/remotion/src/remotion/compositions/`.
+- **Pilot / outline** work in `KM/Docs/video-ai-preparation/`.
+- Deciding **which visual** for a beat (code vs text vs diagram vs 3D vs transition).
+- Adding a **missing** UI block: static component, Storybook, demo, docs.
+
+## Source of truth (read order)
+
+1. `KM/Docs/runbooks/video-ai-development.md` — §03b procedure, §04 pacing + THP text taxonomy + Sequence persistence + demo catalogue.
+2. `KM/Docs/runbooks/remotion.md` — Studio, compositions, demo catalogue section.
+3. `KM/Docs/reference/solarpunk-theme-decisions.md` — theme, demo catalogue and motion.
+4. `packages/ui/src/lib/remotion/index.ts` — exported blocks.
+5. `references/library-matrix.md` (this package) — block-to-demo table.
+
+## Workflow: missing building block
+
+1. **Need is not in library** (check `index.ts` + `references/library-matrix.md`).
+2. **Static UI** in `packages/ui/src/` — **no** `useCurrentFrame` (see `KM/Docs/00-architecture.md` UI vs Remotion).
+3. **Storybook** — colocated `*.stories.tsx`; validate with repo Storybook runbook.
+4. **Animated primitive** — `packages/remotion-lib/` if reusable frame-aware behavior.
+5. **Demo composition** — `apps/remotion/src/remotion/compositions/demos/` + register in `apps/remotion/src/remotion/Root.tsx`.
+6. **Docs** — update `KM/Docs/runbooks/remotion.md` demo table if needed; solarpunk decisions table if signature motion; `references/library-matrix.md` row.
+7. **Re-read** this SKILL — keep matrices accurate.
+
+## Decision prompts (agent checklist)
+
+### Text
+
+- What **role**? (episode title / subtitle / long narration / one-shot emphasis) — apply runbook **THP text taxonomy** (`video-ai-development.md` §04): e.g. hero line `TextReveal`, body `Typewriter`, optional `WordByWord`.
+- Must the line **stay on screen until scene cut**? If yes, parent `Sequence` duration must cover `sceneDuration - from` (no premature unmount).
+- **CPS / pauses** live in `*-content.ts`, not scattered magic numbers.
+
+### Code
+
+- Learner **types commands and sees output**? → `Terminal` with `delay` between lines, `theme={solarTheme}`.
+- **Static excerpt** (no replay)? → `CodeBlockStatic` + `FadeIn`.
+- **Diff story**? → `DiffView` when appropriate.
+- Do **not** duplicate CLI lines as raw `Typewriter` if `Terminal` is the teaching device.
+
+### Transitions
+
+- Prefer `FadeSlide`, `ZoomBlur`, `Wipe` from `@repo/ui/remotion` with **`theme={solarTheme}`**.
+- **Diversify** within one video: avoid the same transition on every cut; use `TransitionsDemo` for ordering ideas.
+- Do not add `@remotion/transitions` package unless already a declared dependency (project convention).
+
+### Diagrams
+
+- Simple staged nodes (few steps)? → `FlowChart` / `Tree` / `Timeline` / `ComparisonTable` as fits.
+- Heavy / versioned schema? → Mermaid (or other) **source file** + generated SVG per workflow in `video-ai-development` §03b 3bis; animate reveal in Remotion.
+- **Order and traceability**: follow [`references/diagram-asset-pipeline.md`](references/diagram-asset-pipeline.md) and keep `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md` updated (no Storybook/demo before `.mmd` + `public/` asset unless documented N/A).
+
+### 3D
+
+- **ParticleField**: background only, low opacity (Solarpunk demos).
+- **RotatingObject / FloatingText**: use sparingly; must not hurt readability.
+
+### Audio / characters
+
+- See `AudioDemo` / `CharactersDemo` and remotion skill rules for `audio.md`, `voiceover.md` when relevant.
+
+## Anti-patterns
+
+- One-off colors or motion **outside** `solarTheme` / kit springs without ADR-level justification.
+- Decorative `--error` color (solarpunk decisions).
+- Short nested `Sequence` for content that must remain visible until scene end.
+- New animated effect **without** demo + doc update.
+
+## Done (before closing a video slice)
+
+- `apps/remotion`: lint / types green for touched packages.
+- Studio pass on target composition; duration and holds OK.
+- `KM/Docs/Templates/thp-solarpunk-visual-checklist.md` addressed when visuals changed.
+- If new block: Storybook + demo + matrix row + runbook link if new demo name.
+
+## Cursor install
+
+Source of truth: **`packages/skills/thp-video-generation/`** (this folder). Cursor usually loads project skills from **`.cursor/skills/`** (often gitignored). From the **Video-AI repo root**:
+
+**Copy**
+
+```bash
+mkdir -p .cursor/skills && cp -r packages/skills/thp-video-generation .cursor/skills/
+```
+
+**Symlink** (pick up git updates without copying)
+
+```bash
+mkdir -p .cursor/skills && ln -sf "$(pwd)/packages/skills/thp-video-generation" .cursor/skills/thp-video-generation
+```
+
+Check that `.cursor/skills/thp-video-generation/SKILL.md` exists. Same pattern as other project skills (e.g. `thp-solarpunk-visual`).
