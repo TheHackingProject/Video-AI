@@ -21,6 +21,7 @@
     "@repo/typescript-config": "*",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
+    "remotion": "4.0.434",
     "typescript": "5.9.2"
   }
 }
