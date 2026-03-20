@@ -33,9 +33,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Cursor / MCP (do not commit PAT or mcp.json with secrets)
-.cursor/
-.cursor/mcp.json
+# Cursor: ignore local workspace (MCP, etc.); keep environment.json for Background Agents (no secrets)
+.cursor/*
+!.cursor/environment.json
 
 # Misc
 .DS_Store

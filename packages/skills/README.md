@@ -10,7 +10,24 @@ This folder collects skills used for video creation and production workflow.
 | `remotion-best-practices` | **Symlink** → `Remotion/skills/remotion` (same `SKILL.md` + `rules/` as upstream). Commit this link so paths stay stable in docs. |
 | `thp-video-generation/` | **Versioned** THP pipeline skill (this repo). |
 
-**App Remotion (`apps/remotion`)** : `apps/remotion/.agents/skills/remotion-best-practices` is a **symlink** to `packages/skills/remotion-best-practices` so Codex/OpenAI-style agents next to the app resolve the same tree as the monorepo — no duplicate file copies.
+**Repo root (`Video-AI/`)** : `.agents/skills/remotion-best-practices` is a **symlink** to `packages/skills/remotion-best-practices` for tools whose working directory is the monorepo root.
+
+**App Remotion (`apps/remotion`)** : `apps/remotion/.agents/skills/remotion-best-practices` is a **symlink** to `packages/skills/remotion-best-practices` for agents scoped to the Remotion app — same tree, no duplicate files.
+
+## Bootstrap (Cursor Agent Skills + machines distantes)
+
+Run once after clone (or rely on **Cursor Background Agents** — [`.cursor/environment.json`](../../.cursor/environment.json) runs an equivalent `install` step):
+
+```bash
+bun run bootstrap:agents
+# or: bash scripts/bootstrap-agent-tooling.sh
+```
+
+This initializes `packages/skills/Remotion` and creates **`.cursor/skills/`** symlinks to `thp-video-generation` and `remotion-best-practices`.
+
+**`thp-solarpunk-visual`** is not under `packages/skills/`; symlink manually from [KM/Docs/meta/thp-solarpunk-visual-skill.md](../../KM/Docs/meta/thp-solarpunk-visual-skill.md) if you use it in Cursor.
+
+**Note:** Cursor **Agent Skills** read `.cursor/skills/`, not `apps/remotion/.agents/`. The `.agents/` paths are for other agent stacks (e.g. Codex) with a different CWD.
 
 ## Clone / update submodule
 
@@ -37,9 +54,9 @@ git commit -m "chore: bump remotion-dev/skills submodule"
 - **`Remotion/`** + **`remotion-best-practices`** — official Remotion rules (`@remotion/skills`), composition patterns, animation, assets, timing, audio, etc.
 - **`thp-video-generation/`** — **Video-AI project** skill — block choice (text, code, transitions, 3D, diagrams), Storybook → demo → doc workflow, THP / `solarTheme` alignment. Entry: [`thp-video-generation/SKILL.md`](thp-video-generation/SKILL.md); matrix: [`thp-video-generation/references/library-matrix.md`](thp-video-generation/references/library-matrix.md).
 
-### Cursor (optional local symlinks)
+### Cursor (local symlinks)
 
-Cursor loads project skills from **`.cursor/skills/`** (gitignored). From repo root:
+Prefer **`bun run bootstrap:agents`** to populate **`.cursor/skills/`**. To link by hand:
 
 ```bash
 mkdir -p .cursor/skills

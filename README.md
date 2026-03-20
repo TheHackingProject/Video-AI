@@ -53,7 +53,9 @@ Detailed rules (UI vs Remotion, where to put compositions and primitives): [KM/D
 
 For a full clone: `git clone --recurse-submodules <repo-url>`. If already cloned: `git submodule update --init --recursive`.
 
-Layout and symlinks (`remotion-best-practices`, `apps/remotion/.agents/...`): [`packages/skills/README.md`](packages/skills/README.md).
+After install, **Cursor Agent Skills** and symlink targets: `bun run bootstrap:agents` (see [`packages/skills/README.md`](packages/skills/README.md), [`.cursor/environment.json`](.cursor/environment.json) for Background Agents).
+
+Layout: `remotion-best-practices` under `packages/skills/`, **`.agents/skills/`** (repo root), `apps/remotion/.agents/skills/`.
 
 ## Stack and tools
 
@@ -68,6 +70,7 @@ From the repo root (Video-AI):
 | Action | Command |
 |--------|---------|
 | Install | `bun install` |
+| Bootstrap agent paths (Cursor `.cursor/skills`) | `bun run bootstrap:agents` |
 | Build all | `bun run build` |
 | Dev all | `bun run dev` |
 | Dev Remotion only | `bun run dev --filter=remotion` |

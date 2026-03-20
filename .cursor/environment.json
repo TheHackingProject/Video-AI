@@ -1,0 +1,3 @@
+{
+  "install": "git submodule update --init packages/skills/Remotion && bun install && bash scripts/bootstrap-agent-tooling.sh"
+}

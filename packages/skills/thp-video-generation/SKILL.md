@@ -88,7 +88,13 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 
 ## Cursor install
 
-Source of truth: **`packages/skills/thp-video-generation/`** (this folder). Cursor usually loads project skills from **`.cursor/skills/`** (often gitignored). From the **Video-AI repo root**:
+Source of truth: **`packages/skills/thp-video-generation/`** (this folder). Cursor loads **Agent Skills** from **`.cursor/skills/`**. From the **Video-AI repo root**, fastest path:
+
+```bash
+bun run bootstrap:agents
+```
+
+Manual alternatives:
 
 **Copy**
 
