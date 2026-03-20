@@ -39,7 +39,7 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 
 ### Text
 
-- What **role**? (episode title / subtitle / long narration / one-shot emphasis) — apply runbook **THP text taxonomy** (`video-ai-development.md` §04): e.g. hero line `TextReveal`, body `Typewriter`, optional `WordByWord`.
+- What **role**? (lesson title calm vs high-impact sting / subtitle / long narration / one-shot emphasis) — apply runbook **THP text taxonomy** (`video-ai-development.md` §04): default hero `TextReveal`; body `Typewriter`; optional `WordByWord`; **short** intro/bumper only `GlitchText` (creative brief, sparingly — not course narration).
 - Must the line **stay on screen until scene cut**? If yes, parent `Sequence` duration must cover `sceneDuration - from` (no premature unmount).
 - **CPS / pauses** live in `*-content.ts`, not scattered magic numbers.
 

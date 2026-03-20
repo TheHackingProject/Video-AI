@@ -1,3 +1,7 @@
+/**
+ * Visual inventory for text primitives. Editorial mapping (when to use each):
+ * KM/Docs/runbooks/video-ai-development.md §04 — Taxonomie texte THP.
+ */
 import { AbsoluteFill } from "remotion";
 import {
   Typewriter,

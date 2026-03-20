@@ -4,10 +4,10 @@ Canonical export: `packages/ui/src/lib/remotion/index.ts`. Demos: `apps/remotion
 
 | Family | Component (`@repo/ui/remotion`) | Typical intent | Demo reference | Notes |
 |--------|----------------------------------|----------------|----------------|-------|
-| Text | `Typewriter` | Narration, subtitle line | `TextDemo` | See runbook text taxonomy (title vs body CPS in `*-content.ts`) |
-| Text | `WordByWord` | One-line emphasis | `TextDemo` | Use sparingly (max ~1 phrase / scene) |
-| Text | `TextReveal` | Episode title / hero line | `TextDemo` | `theme={solarTheme}`, WCAG |
-| Text | `GlitchText` | Not default THP pedagogical | `TextDemo` | Avoid unless explicit creative brief |
+| Text | `Typewriter` | Narration, subtitle line | `TextDemo` | See **runbook §04** taxonomy (title vs body CPS in `*-content.ts`) |
+| Text | `WordByWord` | One-line emphasis, one beat | `TextDemo` | Max ~1 phrase / scene |
+| Text | `TextReveal` | Lesson hero title (default THP) | `TextDemo` | Calm impact; `theme={solarTheme}`, WCAG |
+| Text | `GlitchText` | Short high-impact title / bumper / trailer sting | `TextDemo` | **Not** for long copy or main pedagogy; brief + rare; see runbook §04 (non-deterministic render — validate `still`) |
 | Code | `Terminal` | Commands + output, typing | `DemoShowcaseSolarpunkDemo`, `CodeDemo` | Delays between lines; `theme={solarTheme}` |
 | Code | `CodeBlock` | Syntax-highlight block | `CodeDemo` | Animated variant in demos if present |
 | Code | `DiffView` | Before/after code | `CodeDemo` | When diff is the teaching point |

@@ -55,6 +55,9 @@ export interface Theme {
 /**
  * THP / Video-AI canonical Remotion theme (Solarpunk dark).
  * Keep semantic hex in sync with packages/theme/solarpunk.tokens.css
+ *
+ * Text animation roles (Typewriter vs TextReveal vs GlitchText, etc.) live in
+ * KM/Docs/runbooks/video-ai-development.md §04 — not in this Theme object.
  */
 export const solarTheme: Theme = {
   colors: {
