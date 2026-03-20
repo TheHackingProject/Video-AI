@@ -7,6 +7,7 @@ import {
 import { FadeIn } from "@repo/remotion-lib";
 import {
   FlowChart,
+  GlitchText,
   ParticleField,
   ProgressBar,
   TextReveal,
@@ -47,9 +48,9 @@ import {
   SCENE_DURATIONS,
   SCENE_KEYWORDS,
   TITLE,
-  TITLE_REVEAL_DURATION,
+  TITLE_GLITCH_DURATION,
   TITLE_SUBTITLE,
-  TITLE_SUBTITLE_CPS,
+  TITLE_SUBTITLE_REVEAL_DURATION,
   TITLE_SUBTITLE_START_FRAME,
   TOTAL_SCENES,
 } from "./pilot02-content";
@@ -120,26 +121,28 @@ export const Pilot02GitVsGithub: React.FC = () => {
           keyword={SCENE_KEYWORDS[0]}
         >
           <div style={narrationBoxStyle}>
-            <TextReveal
+            <GlitchText
               text={TITLE}
               startFrame={0}
-              duration={TITLE_REVEAL_DURATION}
+              duration={TITLE_GLITCH_DURATION}
               theme={solarTheme}
               fontSize={solarTheme.fontSizes.display}
               color={tc.text}
-              direction="left"
+              glitchColor1={tc.secondary}
+              glitchColor2={tc.accent}
+              intensity={0.4}
             />
           </div>
           <div style={{ marginTop: 20, minHeight: 56, ...narrationBoxStyle }}>
-            <Typewriter
+            <TextReveal
               text={TITLE_SUBTITLE}
               startFrame={TITLE_SUBTITLE_START_FRAME}
-              charsPerSecond={TITLE_SUBTITLE_CPS}
+              duration={TITLE_SUBTITLE_REVEAL_DURATION}
               theme={solarTheme}
               fontSize={solarTheme.fontSizes.xl}
               fontFamily={solarTheme.fonts.body}
               color={tc.textMuted}
-              showCursor={false}
+              direction="left"
             />
           </div>
         </Serie01SceneShell>

@@ -67,14 +67,22 @@ export const FRAME = {
     SCENE_DURATIONS.recap,
 } as const;
 
-// --- Title: TextReveal hero + Typewriter subtitle (§04) ---
+// --- Role ids (matrix contract) ---
+export const ROLE_INTRO_HERO = "ROLE_INTRO_HERO";
+export const ROLE_INTRO_SUBTITLE = "ROLE_INTRO_SUBTITLE";
+export const ROLE_NARRATION = "ROLE_NARRATION";
+export const ROLE_EMPHASIS = "ROLE_EMPHASIS";
+export const ROLE_CTA_TITLE = "ROLE_CTA_TITLE";
+export const ROLE_CTA_SUBTITLE = "ROLE_CTA_SUBTITLE";
+
+// --- Title: GlitchText hero + TextReveal subtitle (matrix v1) ---
 export const TITLE = "Pré-requis : terminal et bases";
 export const SUBTITLE = "2 commandes pour suivre Git";
-export const TITLE_TEXT_REVEAL_DURATION = 28;
-export const TITLE_PAUSE_AFTER_REVEAL_FRAMES = 10;
-export const TITLE_SUBTITLE_CPS = 14;
+export const TITLE_GLITCH_DURATION = 34;
+export const TITLE_PAUSE_AFTER_GLITCH_FRAMES = 8;
+export const TITLE_SUBTITLE_REVEAL_DURATION = 24;
 export const TITLE_SUBTITLE_START_FRAME =
-  TITLE_TEXT_REVEAL_DURATION + TITLE_PAUSE_AFTER_REVEAL_FRAMES;
+  TITLE_GLITCH_DURATION + TITLE_PAUSE_AFTER_GLITCH_FRAMES;
 
 // --- Intro (two typewriter blocks, single scene) ---
 export const INTRO_HOOK =
@@ -103,7 +111,8 @@ export const STEP1_ANALOGY_CPS = 24;
 export const STEP1_OS_LINE =
   "Mac : Spotlight ou menu → Terminal · Linux : souvent Ctrl+Alt+T · Windows : PowerShell ; pour coller au cours : Git Bash ou WSL.";
 
-export const STEP1_OS_CPS = 24;
+export const STEP1_OS_WORD_DELAY = 8;
+export const STEP1_OS_HIGHLIGHT_COLOR_ROLE = "success";
 
 export const STEP1_CODE = `# Ouvrir le terminal
 # Mac : Spotlight → "Terminal"

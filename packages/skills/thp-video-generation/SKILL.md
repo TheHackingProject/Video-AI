@@ -17,13 +17,16 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 - Deciding **which visual** for a beat (code vs text vs diagram vs 3D vs transition).
 - Adding a **missing** UI block: static component, Storybook, demo, docs.
 
-## Source of truth (read order)
+## Source of truth (strict, no duplicate matrix)
 
-1. `KM/Docs/runbooks/video-ai-development.md` — §03b procedure, §04 pacing + THP text taxonomy + Sequence persistence + demo catalogue.
-2. `KM/Docs/runbooks/remotion.md` — Studio, compositions, demo catalogue section.
-3. `KM/Docs/reference/solarpunk-theme-decisions.md` — theme, demo catalogue and motion.
-4. `packages/ui/src/lib/remotion/index.ts` — exported blocks.
-5. `references/library-matrix.md` (this package) — block-to-demo table.
+1. **This SKILL** (`packages/skills/thp-video-generation/SKILL.md`) — canonical workflow contract.
+2. `references/library-matrix.md` (this package) — canonical role-to-component matrix used by scripts/compositions.
+3. `KM/Docs/runbooks/video-ai-development.md` — operational procedure and QA loop; references this SKILL/matrix.
+4. `KM/Docs/runbooks/remotion.md` — Remotion-specific commands and runtime guidance.
+5. `KM/Docs/reference/solarpunk-theme-decisions.md` — theme/motion decisions log (history, not matrix source).
+6. `packages/ui/src/lib/remotion/index.ts` — available exports to apply the matrix.
+
+If another doc disagrees with the matrix, update this SKILL + matrix first, then align docs.
 
 ## Workflow: missing building block
 
@@ -39,7 +42,9 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 
 ### Text
 
-- What **role**? (lesson title calm vs high-impact sting / subtitle / long narration / one-shot emphasis) — apply runbook **THP text taxonomy** (`video-ai-development.md` §04): default hero `TextReveal`; body `Typewriter`; optional `WordByWord`; **short** intro/bumper only `GlitchText` (creative brief, sparingly — not course narration).
+- What **role**? Use the canonical matrix in `references/library-matrix.md`.
+- Global v1 decision: intro hero title defaults to `GlitchText` for all videos; subtitle defaults to `TextReveal`.
+- Script files (`*-content.ts`) must characterize each visible text block with explicit role constants/ids to avoid implicit choices in TSX.
 - Must the line **stay on screen until scene cut**? If yes, parent `Sequence` duration must cover `sceneDuration - from` (no premature unmount).
 - **CPS / pauses** live in `*-content.ts`, not scattered magic numbers.
 

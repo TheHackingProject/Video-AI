@@ -4,6 +4,7 @@ import { FadeIn } from "@repo/remotion-lib";
 import {
   FadeSlide,
   FlowChart,
+  GlitchText,
   ParticleField,
   ProgressBar,
   SceneHeader,
@@ -42,8 +43,8 @@ import {
   STEP1_ANALOGY_CPS,
   STEP1_BEATS,
   STEP1_CODE,
-  STEP1_OS_CPS,
   STEP1_OS_LINE,
+  STEP1_OS_WORD_DELAY,
   STEP2_BEATS,
   STEP2_BODY_CPS,
   STEP2_PARA1,
@@ -64,9 +65,9 @@ import {
   PILOT01_TOTAL_SCENES,
   SHOW_TYPEWRITER_CURSOR,
   TITLE,
-  TITLE_SUBTITLE_CPS,
   TITLE_SUBTITLE_START_FRAME,
-  TITLE_TEXT_REVEAL_DURATION,
+  TITLE_GLITCH_DURATION,
+  TITLE_SUBTITLE_REVEAL_DURATION,
 } from "./pilot01-content";
 import { Serie01SceneShell } from "./Serie01SceneShell";
 
@@ -247,26 +248,28 @@ export const Pilot01Prerequis: React.FC = () => {
           keyword={PILOT01_SCENE_KEYWORDS[0]}
         >
           <div style={narrationBoxStyle}>
-            <TextReveal
+            <GlitchText
               text={TITLE}
               startFrame={0}
-              duration={TITLE_TEXT_REVEAL_DURATION}
+              duration={TITLE_GLITCH_DURATION}
               theme={solarTheme}
               fontSize={solarTheme.fontSizes.display}
               color={tc.text}
-              direction="left"
+              glitchColor1={tc.secondary}
+              glitchColor2={tc.accent}
+              intensity={0.42}
             />
           </div>
           <div style={{ marginTop: 28, minHeight: 72, ...narrationBoxStyle }}>
-            <Typewriter
+            <TextReveal
               text={SUBTITLE}
               startFrame={TITLE_SUBTITLE_START_FRAME}
-              charsPerSecond={TITLE_SUBTITLE_CPS}
+              duration={TITLE_SUBTITLE_REVEAL_DURATION}
               theme={solarTheme}
               fontSize={solarTheme.fontSizes.xl}
               fontFamily={solarTheme.fonts.body}
               color={tc.textMuted}
-              showCursor={SHOW_TYPEWRITER_CURSOR}
+              direction="left"
             />
           </div>
         </Serie01SceneShell>
@@ -388,14 +391,14 @@ export const Pilot01Prerequis: React.FC = () => {
                   }}
                 >
                   <div style={narrationBoxStyle}>
-                    <Typewriter
+                    <WordByWord
                       text={STEP1_OS_LINE}
                       startFrame={0}
-                      charsPerSecond={STEP1_OS_CPS}
+                      wordDelay={STEP1_OS_WORD_DELAY}
                       theme={solarTheme}
                       fontSize={19}
                       color={tc.textMuted}
-                      showCursor={SHOW_TYPEWRITER_CURSOR}
+                      highlightColor={tc.success}
                     />
                   </div>
                 </div>

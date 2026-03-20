@@ -8,6 +8,14 @@ export const FPS = 30;
 
 export const PREMOUNT_FRAMES = FPS;
 
+// --- Role ids (matrix contract) ---
+export const ROLE_INTRO_HERO = "ROLE_INTRO_HERO";
+export const ROLE_INTRO_SUBTITLE = "ROLE_INTRO_SUBTITLE";
+export const ROLE_NARRATION = "ROLE_NARRATION";
+export const ROLE_EMPHASIS = "ROLE_EMPHASIS";
+export const ROLE_CTA_TITLE = "ROLE_CTA_TITLE";
+export const ROLE_CTA_SUBTITLE = "ROLE_CTA_SUBTITLE";
+
 export const TOTAL_SCENES = 6;
 
 export const SCENE_DURATIONS = {
@@ -38,15 +46,15 @@ export const FRAME = {
     SCENE_DURATIONS.recap,
 } as const;
 
-// --- Scene 1: TextReveal hero + Typewriter subtitle ---
+// --- Scene 1: GlitchText hero + TextReveal subtitle ---
 export const TITLE = "Git vs GitHub";
 export const TITLE_SUBTITLE = "Une idée en 45 secondes";
 
-export const TITLE_REVEAL_DURATION = 26;
-export const TITLE_PAUSE_AFTER_REVEAL = 8;
-export const TITLE_SUBTITLE_CPS = 22;
+export const TITLE_GLITCH_DURATION = 28;
+export const TITLE_PAUSE_AFTER_GLITCH = 8;
+export const TITLE_SUBTITLE_REVEAL_DURATION = 18;
 export const TITLE_SUBTITLE_START_FRAME =
-  TITLE_REVEAL_DURATION + TITLE_PAUSE_AFTER_REVEAL;
+  TITLE_GLITCH_DURATION + TITLE_PAUSE_AFTER_GLITCH;
 
 // --- Scene 2: Typewriter hook ---
 export const HOOK_TEXT =
