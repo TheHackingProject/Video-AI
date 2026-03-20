@@ -29,7 +29,7 @@ Then use the skill’s `scripts/render.mjs` / `scripts/batch.mjs` from the insta
 
 **Checklist per video**: after adding or changing diagrams, update `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md` (order: `.mmd` → SVG in `public/` → Storybook if needed → Remotion demo if needed → docs). See [thp-video-generation/references/diagram-asset-pipeline.md](thp-video-generation/references/diagram-asset-pipeline.md).
 
-Paths and options: [runbooks/video-ai-development](../../KM/Docs/runbooks/video-ai-development.md) (section 03b, item 3bis).
+Paths and options: [runbooks/video-ai-development](../../KM/Docs/runbooks/video-ai-development.md) (section 03b, item 3bis). For most THP lesson flows, use **React schematic** [`SchematicFlowChartView`](../../packages/ui/src/lib/diagrams/SchematicFlowChartView.tsx) + [`FlowChart`](../../packages/ui/src/lib/remotion/diagrams/FlowChart.tsx) instead of embedding a small pre-rendered SVG.
 
 - AI SVG generation: `@neversight/generate-svg` via agentskill.sh — generate vector illustrations (logos, visuals, icons) exportable as SVG for Remotion scenes.
 

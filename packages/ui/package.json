@@ -5,7 +5,8 @@
   "exports": {
     "./*": "./src/*.tsx",
     "./remotion": "./src/lib/remotion/index.ts",
-    "./icons": "./src/thp-lucide.ts"
+    "./icons": "./src/thp-lucide.ts",
+    "./schematic-flow-chart-view": "./src/lib/diagrams/SchematicFlowChartView.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

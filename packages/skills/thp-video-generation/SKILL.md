@@ -60,7 +60,8 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 
 - Simple staged nodes (few steps)? → `FlowChart` / `Tree` / `Timeline` / `ComparisonTable` as fits.
 - Heavy / versioned schema? → Mermaid (or other) **source file** + generated SVG per workflow in `video-ai-development` §03b 3bis; animate reveal in Remotion.
-- **Order and traceability**: follow [`references/diagram-asset-pipeline.md`](references/diagram-asset-pipeline.md) and keep `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md` updated (no Storybook/demo before `.mmd` + `public/` asset unless documented N/A).
+- **Order and traceability**: follow [`references/diagram-asset-pipeline.md`](references/diagram-asset-pipeline.md) and keep `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md` updated when using optional **Mermaid → SVG** assets (no Storybook/demo before `.mmd` + `public/` unless documented N/A).
+- **Default THP lesson flow**: `SchematicFlowChartView` (Storybook) + `FlowChart` (`DiagramsDemo`) — text, Lucide icons, arrows; no tiny raster/SVG diagram for primary pedagogy.
 
 ### 3D
 

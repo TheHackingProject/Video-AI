@@ -1,13 +1,46 @@
 import { AbsoluteFill } from "remotion";
-import { FlowChart, Tree, Timeline, ComparisonTable } from "@repo/ui/remotion";
+import {
+  FlowChart,
+  Tree,
+  Timeline,
+  ComparisonTable,
+  solarTheme,
+} from "@repo/ui/remotion";
+import type { ThpLucideSlug } from "@repo/ui/icons";
+
+const schematicNodes: {
+  id: string;
+  label: string;
+  subtitle?: string;
+  iconSlug: ThpLucideSlug;
+}[] = [
+  {
+    id: "1",
+    label: "Script & outline",
+    subtitle: "Pilot + beats in KM",
+    iconSlug: "learningPath",
+  },
+  {
+    id: "2",
+    label: "Storybook",
+    subtitle: "Static UI review",
+    iconSlug: "sprout",
+  },
+  {
+    id: "3",
+    label: "Remotion",
+    subtitle: "Timed composition",
+    iconSlug: "terminal",
+  },
+  {
+    id: "4",
+    label: "Ship",
+    subtitle: "Catalogue + checklist",
+    iconSlug: "sparkle",
+  },
+];
 
 export const DiagramsDemo: React.FC = () => {
-  const flowChartNodes = [
-    { id: "1", label: "Start", icon: "🚀" },
-    { id: "2", label: "Process", icon: "⚙️" },
-    { id: "3", label: "Decision", icon: "🤔" },
-    { id: "4", label: "End", icon: "✅" },
-  ];
 
   const treeRoot = {
     id: "root",
@@ -59,10 +92,15 @@ export const DiagramsDemo: React.FC = () => {
       }}
     >
       <div>
-        <p style={{ color: "#666", fontSize: 14, marginBottom: 12 }}>
-          FlowChart
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 12 }}>
+          SchematicFlowChart — text, Lucide, arrows (see Storybook)
         </p>
-        <FlowChart nodes={flowChartNodes} startFrame={0} />
+        <FlowChart
+          nodes={schematicNodes}
+          startFrame={0}
+          nodeDelay={22}
+          theme={solarTheme}
+        />
       </div>
 
       <div>

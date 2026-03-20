@@ -1,11 +1,18 @@
-import React from "react";
-import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
-import { defaultTheme, Theme } from "../theme";
+import type { CSSProperties, FC } from "react";
+import { useCurrentFrame, useVideoConfig, spring } from "remotion";
+import type { ThpLucideSlug } from "../../../thp-lucide";
+import { defaultTheme, type Theme } from "../theme";
 import { springConfigs } from "../utils/animations";
+import {
+  SchematicFlowChartView,
+  type SchematicPalette,
+} from "../../diagrams/SchematicFlowChartView";
 
-interface FlowNode {
+export interface FlowNode {
   id: string;
   label: string;
+  subtitle?: string;
+  iconSlug?: ThpLucideSlug;
   icon?: string;
   color?: string;
 }
@@ -17,13 +24,36 @@ interface FlowChartProps {
   direction?: "horizontal" | "vertical";
   showArrows?: boolean;
   theme?: Theme;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
-export const FlowChart: React.FC<FlowChartProps> = ({
+function themeToPalette(theme: Theme): Partial<SchematicPalette> {
+  return {
+    surface: `${theme.colors.primary}14`,
+    surfaceBorder: `${theme.colors.primary}73`,
+    text: theme.colors.text,
+    textMuted: theme.colors.textMuted,
+    arrow: theme.colors.textMuted,
+    accent: theme.colors.primary,
+  };
+}
+
+function mapNodes(nodes: FlowNode[]) {
+  return nodes.map((node) => ({
+    id: node.id,
+    title: node.label,
+    subtitle: node.subtitle,
+    iconSlug: node.iconSlug,
+    decorativeGlyph:
+      node.iconSlug || !node.icon ? undefined : node.icon,
+    accent: node.color,
+  }));
+}
+
+export const FlowChart: FC<FlowChartProps> = ({
   nodes,
   startFrame = 0,
-  nodeDelay = 20,
+  nodeDelay = 24,
   direction = "horizontal",
   showArrows = true,
   theme = defaultTheme,
@@ -32,98 +62,33 @@ export const FlowChart: React.FC<FlowChartProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const isHorizontal = direction === "horizontal";
+  const nodeProgress = nodes.map((_, index) => {
+    const nodeStart = startFrame + index * nodeDelay;
+    return spring({
+      frame: frame - nodeStart,
+      fps,
+      config: springConfigs.smooth,
+    });
+  });
+
+  const arrowProgress = nodes.slice(0, -1).map((_, index) => {
+    const arrowStart = startFrame + index * nodeDelay + nodeDelay * 0.55;
+    return spring({
+      frame: frame - arrowStart,
+      fps,
+      config: springConfigs.smooth,
+    });
+  });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: isHorizontal ? "row" : "column",
-        alignItems: "center",
-        gap: theme.spacing.md,
-        ...style,
-      }}
-    >
-      {nodes.map((node, index) => {
-        const nodeStart = startFrame + index * nodeDelay;
-        const progress = spring({
-          frame: frame - nodeStart,
-          fps,
-          config: springConfigs.bouncy,
-        });
-
-        const arrowStart = nodeStart + nodeDelay / 2;
-        const arrowProgress = spring({
-          frame: frame - arrowStart,
-          fps,
-          config: springConfigs.smooth,
-        });
-
-        const nodeColor = node.color || theme.colors.primary;
-
-        return (
-          <React.Fragment key={node.id}>
-            {/* Node */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: theme.spacing.sm,
-                opacity: progress,
-                transform: `scale(${interpolate(progress, [0, 1], [0.5, 1])})`,
-              }}
-            >
-              <div
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: theme.borderRadius.lg,
-                  backgroundColor: `${nodeColor}20`,
-                  border: `2px solid ${nodeColor}`,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: 32,
-                }}
-              >
-                {node.icon || index + 1}
-              </div>
-              <span
-                style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: theme.fontSizes.sm,
-                  color: theme.colors.text,
-                  textAlign: "center",
-                  maxWidth: 100,
-                }}
-              >
-                {node.label}
-              </span>
-            </div>
-
-            {/* Arrow */}
-            {showArrows && index < nodes.length - 1 && (
-              <svg
-                width={isHorizontal ? 40 : 24}
-                height={isHorizontal ? 24 : 40}
-                style={{
-                  opacity: arrowProgress,
-                  transform: isHorizontal ? "none" : "rotate(90deg)",
-                }}
-              >
-                <path
-                  d={isHorizontal ? "M0 12H30M30 12L22 4M30 12L22 20" : "M12 0V30M12 30L4 22M12 30L20 22"}
-                  stroke={theme.colors.textMuted}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-              </svg>
-            )}
-          </React.Fragment>
-        );
-      })}
-    </div>
+    <SchematicFlowChartView
+      nodes={mapNodes(nodes)}
+      direction={direction}
+      showArrows={showArrows}
+      nodeProgress={nodeProgress}
+      arrowProgress={arrowProgress}
+      palette={themeToPalette(theme)}
+      style={style}
+    />
   );
 };

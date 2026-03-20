@@ -13,7 +13,7 @@ Canonical export: `packages/ui/src/lib/remotion/index.ts`. Demos: `apps/remotion
 | Code | `DiffView` | Before/after code | `CodeDemo` | When diff is the teaching point |
 | Code (static UI) | `CodeBlockStatic` (`@repo/ui/code-block-static`) | Fixed snippet, no frame logic | Storybook colocated | Use in composition + `FadeIn` from `@repo/remotion-lib` |
 | Transitions | `FadeSlide`, `ZoomBlur`, `Wipe` | Scene / block handoff | `TransitionsDemo` | Diversify order in one video; always `solarTheme` |
-| Diagrams | `FlowChart`, `Tree`, `Timeline`, `ComparisonTable` | Concept structure | `DiagramsDemo` | Prefer prepared SVG for heavy diagrams (see video-ai-development 03b); trace order in `diagrams/<slug>/ASSET-PIPELINE.md` + [diagram-asset-pipeline.md](diagram-asset-pipeline.md) |
+| Diagrams | `FlowChart` (uses `SchematicFlowChartView`), `Tree`, `Timeline`, `ComparisonTable` | Concept structure, text+Lucide schematic | `DiagramsDemo` | Default: React schematic (Storybook `SchematicFlowChartView`). Optional: prepared SVG for heavy diagrams (video-ai-development 03b); `diagrams/<slug>/ASSET-PIPELINE.md` + [diagram-asset-pipeline.md](diagram-asset-pipeline.md) |
 | 3D | `ParticleField`, `RotatingObject`, `FloatingText` | Atmosphere / focus | `ThreeDDemo`, `DemoShowcaseSolarpunk` | Keep `ParticleField` subtle for courses |
 | Audio | `Waveform`, `Spectrum`, `AudioBar` | VO / music viz | `AudioDemo` | |
 | Characters | `Avatar`, `SpeakingHead`, `Silhouette` | Presenter metaphor | `CharactersDemo` | |
