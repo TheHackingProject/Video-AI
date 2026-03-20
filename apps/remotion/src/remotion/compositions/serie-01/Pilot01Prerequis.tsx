@@ -78,6 +78,7 @@ const particleColors = [
   tc.accent,
   tc.success,
 ];
+const VINE_TILE_PATTERN = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 Q45 15 30 30 Q15 45 30 60' fill='none' stroke='%2322c55e' stroke-width='1'/%3E%3C/svg%3E")`;
 
 const narrationBoxStyle: React.CSSProperties = {
   maxWidth: 820,
@@ -217,6 +218,29 @@ export const Pilot01Prerequis: React.FC = () => {
           colors={particleColors}
         />
       </div>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+          opacity: 0.08,
+          background: `
+            linear-gradient(135deg, transparent 45%, ${tc.primary}10 50%, transparent 55%),
+            linear-gradient(225deg, transparent 45%, ${tc.secondary}0f 50%, transparent 55%)
+          `,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          opacity: 0.03,
+          pointerEvents: "none",
+          backgroundImage: VINE_TILE_PATTERN,
+        }}
+      />
 
       <div
         style={{
@@ -246,6 +270,7 @@ export const Pilot01Prerequis: React.FC = () => {
           sceneNumber={1}
           totalScenes={PILOT01_TOTAL_SCENES}
           keyword={PILOT01_SCENE_KEYWORDS[0]}
+          transition="zoom-blur"
         >
           <div style={narrationBoxStyle}>
             <GlitchText
@@ -284,6 +309,7 @@ export const Pilot01Prerequis: React.FC = () => {
           sceneNumber={2}
           totalScenes={PILOT01_TOTAL_SCENES}
           keyword={PILOT01_SCENE_KEYWORDS[1]}
+          transition="wipe-left"
         >
           <div style={{ minHeight: 168, ...narrationBoxStyle }}>
             <Typewriter
@@ -412,11 +438,12 @@ export const Pilot01Prerequis: React.FC = () => {
                 <div
                   style={{
                     position: "absolute",
-                    bottom: 100,
+                    bottom: 150,
                     left: 40,
                     right: 40,
                     display: "flex",
                     justifyContent: "center",
+                    zIndex: 6,
                   }}
                 >
                   <FadeIn
@@ -513,11 +540,12 @@ export const Pilot01Prerequis: React.FC = () => {
                 <div
                   style={{
                     position: "absolute",
-                    bottom: 96,
+                    bottom: 150,
                     left: 48,
                     right: 48,
                     display: "flex",
                     justifyContent: "center",
+                    zIndex: 6,
                   }}
                 >
                   <div style={{ width: "100%", maxWidth: 640 }}>
@@ -613,11 +641,12 @@ export const Pilot01Prerequis: React.FC = () => {
                 <div
                   style={{
                     position: "absolute",
-                    bottom: 96,
+                    bottom: 150,
                     left: 48,
                     right: 48,
                     display: "flex",
                     justifyContent: "center",
+                    zIndex: 6,
                   }}
                 >
                   <div style={{ width: "100%", maxWidth: 640 }}>
@@ -731,6 +760,7 @@ export const Pilot01Prerequis: React.FC = () => {
           totalScenes={PILOT01_TOTAL_SCENES}
           keyword={PILOT01_SCENE_KEYWORDS[6]}
           bottomPadding={48}
+          transition="zoom-blur"
         >
           <FadeIn startFrame={0} durationInFrames={12} translateY={10}>
             <ThpGitBranch size={48} color={tc.accent} strokeWidth={2} aria-hidden />

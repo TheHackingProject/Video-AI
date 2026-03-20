@@ -120,10 +120,11 @@ export const STEP1_CODE = `# Ouvrir le terminal
 # Windows : PowerShell ou Git Bash / WSL`;
 
 export const STEP1_BEATS = {
-  analogy: { from: 0, duration: 188 },
-  pills: { from: 168, duration: 242 },
-  osLine: { from: 378, duration: 218 },
-  code: { from: 538, duration: 422 },
+  /** Keep each beat mounted until scene cut (no premature disappear). */
+  analogy: { from: 0, duration: SCENE_DURATIONS.step1 },
+  pills: { from: 168, duration: SCENE_DURATIONS.step1 - 168 },
+  osLine: { from: 378, duration: SCENE_DURATIONS.step1 - 378 },
+  code: { from: 538, duration: SCENE_DURATIONS.step1 - 538 },
 } as const;
 
 // --- Step 2 / 3 body (split for staggered typewriter) ---

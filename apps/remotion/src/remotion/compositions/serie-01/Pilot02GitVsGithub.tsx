@@ -57,6 +57,7 @@ import {
 
 const tc = solarTheme.colors;
 const particleColors = [tc.primary, tc.secondary, tc.accent, tc.success];
+const VINE_TILE_PATTERN = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 Q45 15 30 30 Q15 45 30 60' fill='none' stroke='%2322c55e' stroke-width='1'/%3E%3C/svg%3E")`;
 
 const narrationBoxStyle: React.CSSProperties = {
   maxWidth: 920,
@@ -90,6 +91,29 @@ export const Pilot02GitVsGithub: React.FC = () => {
           colors={particleColors}
         />
       </div>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+          opacity: 0.08,
+          background: `
+            linear-gradient(135deg, transparent 45%, ${tc.primary}10 50%, transparent 55%),
+            linear-gradient(225deg, transparent 45%, ${tc.secondary}0f 50%, transparent 55%)
+          `,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          opacity: 0.03,
+          pointerEvents: "none",
+          backgroundImage: VINE_TILE_PATTERN,
+        }}
+      />
 
       <div
         style={{
@@ -119,6 +143,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={1}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[0]}
+          transition="zoom-blur"
         >
           <div style={narrationBoxStyle}>
             <GlitchText
@@ -157,6 +182,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={2}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[1]}
+          transition="wipe-left"
         >
           <div style={{ ...narrationBoxStyle, minHeight: 140 }}>
             <Typewriter
@@ -338,6 +364,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={6}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[5]}
+          transition="zoom-blur"
         >
           <div style={{ ...narrationBoxStyle, minHeight: 44 }}>
             <TextReveal
