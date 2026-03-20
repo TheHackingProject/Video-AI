@@ -2,9 +2,26 @@
  * Pilot 01 — on-screen copy aligned with KM/Docs/video-ai-preparation/pilot-01-prerequis-outline.md
  * VO may extend these strings; keep readable at 1080p.
  * Timings: frame counts @ FPS for deterministic Remotion sequences.
+ * Text roles: runbook §04 (THP taxonomy) — TextReveal hero title; Typewriter narration; WordByWord optional emphasis.
  */
 
 export const FPS = 30;
+
+/** Série 01 chrome: title + intro + 3 steps + recap + CTA */
+export const PILOT01_TOTAL_SCENES = 7;
+
+export const PILOT01_SCENE_KEYWORDS = [
+  "TITRE",
+  "INTRO",
+  "OUVRIR",
+  "PWD",
+  "LS",
+  "RÉCAP",
+  "SUITE",
+] as const;
+
+/** Production: hide typewriter cursor unless debugging pacing. */
+export const SHOW_TYPEWRITER_CURSOR = false;
 
 /** premountFor on main scene sequences (skill remotion-best-practices / sequencing). */
 export const PREMOUNT_FRAMES = FPS;
@@ -50,15 +67,14 @@ export const FRAME = {
     SCENE_DURATIONS.recap,
 } as const;
 
-// --- Title scene typewriter (two lines) ---
+// --- Title: TextReveal hero + Typewriter subtitle (§04) ---
 export const TITLE = "Pré-requis : terminal et bases";
 export const SUBTITLE = "2 commandes pour suivre Git";
-export const TITLE_TYPE_CPS = 14;
-export const TITLE_PAUSE_AFTER_TITLE_FRAMES = 12;
-export const TITLE_LINE1_FRAMES = Math.ceil((TITLE.length / TITLE_TYPE_CPS) * FPS);
-export const TITLE_LINE2_FRAMES = Math.ceil((SUBTITLE.length / TITLE_TYPE_CPS) * FPS);
+export const TITLE_TEXT_REVEAL_DURATION = 28;
+export const TITLE_PAUSE_AFTER_REVEAL_FRAMES = 10;
+export const TITLE_SUBTITLE_CPS = 14;
 export const TITLE_SUBTITLE_START_FRAME =
-  TITLE_LINE1_FRAMES + TITLE_PAUSE_AFTER_TITLE_FRAMES;
+  TITLE_TEXT_REVEAL_DURATION + TITLE_PAUSE_AFTER_REVEAL_FRAMES;
 
 // --- Intro (two typewriter blocks, single scene) ---
 export const INTRO_HOOK =
@@ -178,22 +194,23 @@ export const RECAP_LINE2_FRAMES = Math.ceil(
 export const RECAP_LINE2_START =
   RECAP_LINE1_FRAMES + RECAP_PAUSE_FRAMES - BEAT_OVERLAP_FRAMES;
 
+/** WordByWord for recap line 2 only (one emphasis beat per recap scene, §04). */
+export const RECAP_LINE2_WORD_DELAY = 10;
+
 export const RECAP_FLOWCHART = {
   from: RECAP_LINE1_FRAMES + 8,
   nodeDelay: 11,
   startFrameLocal: 12,
 } as const;
 
-// --- CTA ---
+// --- CTA (TextReveal title + Typewriter subtitle — §04 / serie parity with pilot 02) ---
 export const CTA_TITLE = "À suivre : Git vs GitHub";
 export const CTA_SUBTITLE = "La suite du parcours";
-export const CTA_TYPE_CPS = 16;
-export const CTA_PAUSE_FRAMES = 8;
-export const CTA_TITLE_FRAMES = Math.ceil((CTA_TITLE.length / CTA_TYPE_CPS) * FPS);
-export const CTA_SUB_FRAMES = Math.ceil(
-  (CTA_SUBTITLE.length / CTA_TYPE_CPS) * FPS
-);
-export const CTA_SUB_START = CTA_TITLE_FRAMES + CTA_PAUSE_FRAMES;
+export const CTA_TITLE_REVEAL_DURATION = 22;
+export const CTA_PAUSE_AFTER_TITLE_FRAMES = 8;
+export const CTA_SUBTITLE_CPS = 18;
+export const CTA_SUB_START =
+  CTA_TITLE_REVEAL_DURATION + CTA_PAUSE_AFTER_TITLE_FRAMES;
 
 export const OS_PILLS = [
   { id: "mac", label: "Mac", hint: "Spotlight → Terminal" },

@@ -6,16 +6,15 @@ import {
 } from "remotion";
 import { FadeIn } from "@repo/remotion-lib";
 import {
-  FadeSlide,
   FlowChart,
   ParticleField,
   ProgressBar,
-  SceneHeader,
   TextReveal,
   Typewriter,
   demoShowcaseColors,
   solarTheme,
 } from "@repo/ui/remotion";
+import { Serie01SceneShell } from "./Serie01SceneShell";
 import {
   CTA_SUBTITLE,
   CTA_SUB_START_FRAME,
@@ -64,48 +63,6 @@ const narrationBoxStyle: React.CSSProperties = {
   textAlign: "center",
   lineHeight: 1.65,
 };
-
-function SceneShell({
-  sceneIndex,
-  children,
-}: {
-  sceneIndex: number;
-  children: React.ReactNode;
-}): React.ReactElement {
-  const n = sceneIndex + 1;
-  return (
-    <AbsoluteFill style={{ zIndex: 1 }}>
-      <SceneHeader
-        sceneNumber={n}
-        totalScenes={TOTAL_SCENES}
-        keyword={SCENE_KEYWORDS[sceneIndex]}
-        startFrame={0}
-        theme={solarTheme}
-      />
-      <FadeSlide direction="bottom" delay={3} distance={36}>
-        <AbsoluteFill>
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              paddingTop: 88,
-              paddingLeft: 40,
-              paddingRight: 40,
-              paddingBottom: 40,
-              boxSizing: "border-box",
-            }}
-          >
-            {children}
-          </div>
-        </AbsoluteFill>
-      </FadeSlide>
-    </AbsoluteFill>
-  );
-}
 
 export const Pilot02GitVsGithub: React.FC = () => {
   const { width, height, durationInFrames } = useVideoConfig();
@@ -157,7 +114,11 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.title}
         premountFor={PREMOUNT_FRAMES}
       >
-        <SceneShell sceneIndex={0}>
+        <Serie01SceneShell
+          sceneNumber={1}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[0]}
+        >
           <div style={narrationBoxStyle}>
             <TextReveal
               text={TITLE}
@@ -181,7 +142,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
               showCursor={false}
             />
           </div>
-        </SceneShell>
+        </Serie01SceneShell>
       </Sequence>
 
       <Sequence
@@ -189,7 +150,11 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.hook}
         premountFor={PREMOUNT_FRAMES}
       >
-        <SceneShell sceneIndex={1}>
+        <Serie01SceneShell
+          sceneNumber={2}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[1]}
+        >
           <div style={{ ...narrationBoxStyle, minHeight: 140 }}>
             <Typewriter
               text={HOOK_TEXT}
@@ -201,7 +166,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
               showCursor={false}
             />
           </div>
-        </SceneShell>
+        </Serie01SceneShell>
       </Sequence>
 
       <Sequence
@@ -209,7 +174,11 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.gitConcept}
         premountFor={PREMOUNT_FRAMES}
       >
-        <SceneShell sceneIndex={2}>
+        <Serie01SceneShell
+          sceneNumber={3}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[2]}
+        >
           <div
             style={{
               ...narrationBoxStyle,
@@ -238,7 +207,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
               />
             </div>
           </div>
-        </SceneShell>
+        </Serie01SceneShell>
       </Sequence>
 
       <Sequence
@@ -246,107 +215,90 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.githubConcept}
         premountFor={PREMOUNT_FRAMES}
       >
-        <AbsoluteFill style={{ zIndex: 1 }}>
-          <SceneHeader
-            sceneNumber={4}
-            totalScenes={TOTAL_SCENES}
-            keyword={SCENE_KEYWORDS[3]}
-            startFrame={0}
-            theme={solarTheme}
-          />
-          <FadeSlide direction="bottom" delay={3} distance={36}>
-            <AbsoluteFill>
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  paddingTop: 88,
-                  paddingLeft: 40,
-                  paddingRight: 40,
-                  paddingBottom: 120,
-                  boxSizing: "border-box",
-                }}
-              >
-                <div style={{ ...narrationBoxStyle, textAlign: "center" }}>
-                  <TextReveal
-                    text={GITHUB_TITLE}
-                    startFrame={0}
-                    duration={GITHUB_TITLE_REVEAL_DURATION}
-                    theme={solarTheme}
-                    fontSize={solarTheme.fontSizes.xxl}
-                    color={tc.text}
-                    direction="left"
-                  />
-                  <div style={{ marginTop: 18, minHeight: 100 }}>
-                    <Typewriter
-                      text={GITHUB_BODY}
-                      startFrame={GITHUB_BODY_START_FRAME}
-                      charsPerSecond={GITHUB_BODY_CPS}
-                      theme={solarTheme}
-                      fontSize={22}
-                      color={tc.textMuted}
-                      showCursor={false}
-                    />
-                  </div>
-                  <div style={{ marginTop: 12, minHeight: 40 }}>
-                    <Typewriter
-                      text={GITHUB_CALLOUT}
-                      startFrame={GITHUB_CALLOUT_START_FRAME}
-                      charsPerSecond={GITHUB_CALLOUT_CPS}
-                      theme={solarTheme}
-                      fontSize={20}
-                      fontFamily={solarTheme.fonts.title}
-                      color={tc.accent}
-                      showCursor={false}
-                    />
-                  </div>
-                </div>
+        <Serie01SceneShell
+          sceneNumber={4}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[3]}
+          layout="stack"
+          bottomPadding={120}
+        >
+          <div style={{ ...narrationBoxStyle, textAlign: "center" }}>
+            <TextReveal
+              text={GITHUB_TITLE}
+              startFrame={0}
+              duration={GITHUB_TITLE_REVEAL_DURATION}
+              theme={solarTheme}
+              fontSize={solarTheme.fontSizes.xxl}
+              color={tc.text}
+              direction="left"
+            />
+            <div style={{ marginTop: 18, minHeight: 100 }}>
+              <Typewriter
+                text={GITHUB_BODY}
+                startFrame={GITHUB_BODY_START_FRAME}
+                charsPerSecond={GITHUB_BODY_CPS}
+                theme={solarTheme}
+                fontSize={22}
+                color={tc.textMuted}
+                showCursor={false}
+              />
+            </div>
+            <div style={{ marginTop: 12, minHeight: 40 }}>
+              <Typewriter
+                text={GITHUB_CALLOUT}
+                startFrame={GITHUB_CALLOUT_START_FRAME}
+                charsPerSecond={GITHUB_CALLOUT_CPS}
+                theme={solarTheme}
+                fontSize={20}
+                fontFamily={solarTheme.fonts.title}
+                color={tc.accent}
+                showCursor={false}
+              />
+            </div>
+          </div>
 
-                <Sequence
-                  from={GITHUB_FLOW_FROM_LOCAL}
-                  durationInFrames={GITHUB_FLOW_DURATION}
-                  layout="none"
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: 32,
-                      right: 32,
-                      bottom: 56,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <FadeIn startFrame={0} durationInFrames={16} translateY={8}>
-                      <FlowChart
-                        nodes={[
-                          {
-                            id: "1",
-                            label: "Git",
-                            subtitle: "sur ta machine",
-                            icon: "▸",
-                            color: tc.primary,
-                          },
-                          {
-                            id: "2",
-                            label: "GitHub",
-                            subtitle: "en ligne",
-                            icon: "☁",
-                            color: tc.secondary,
-                          },
-                        ]}
-                        startFrame={GITHUB_FLOW_START_LOCAL}
-                        nodeDelay={GITHUB_FLOW_NODE_DELAY}
-                        direction="horizontal"
-                        theme={solarTheme}
-                      />
-                    </FadeIn>
-                  </div>
-                </Sequence>
-              </div>
-            </AbsoluteFill>
-          </FadeSlide>
-        </AbsoluteFill>
+          <Sequence
+            from={GITHUB_FLOW_FROM_LOCAL}
+            durationInFrames={GITHUB_FLOW_DURATION}
+            layout="none"
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 32,
+                right: 32,
+                bottom: 56,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <FadeIn startFrame={0} durationInFrames={16} translateY={8}>
+                <FlowChart
+                  nodes={[
+                    {
+                      id: "1",
+                      label: "Git",
+                      subtitle: "sur ta machine",
+                      icon: "▸",
+                      color: tc.primary,
+                    },
+                    {
+                      id: "2",
+                      label: "GitHub",
+                      subtitle: "en ligne",
+                      icon: "☁",
+                      color: tc.secondary,
+                    },
+                  ]}
+                  startFrame={GITHUB_FLOW_START_LOCAL}
+                  nodeDelay={GITHUB_FLOW_NODE_DELAY}
+                  direction="horizontal"
+                  theme={solarTheme}
+                />
+              </FadeIn>
+            </div>
+          </Sequence>
+        </Serie01SceneShell>
       </Sequence>
 
       <Sequence
@@ -354,7 +306,11 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.recap}
         premountFor={PREMOUNT_FRAMES}
       >
-        <SceneShell sceneIndex={4}>
+        <Serie01SceneShell
+          sceneNumber={5}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[4]}
+        >
           <div style={{ ...narrationBoxStyle, minHeight: 100 }}>
             <Typewriter
               text={RECAP_TEXT}
@@ -367,7 +323,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
               showCursor={false}
             />
           </div>
-        </SceneShell>
+        </Serie01SceneShell>
       </Sequence>
 
       <Sequence
@@ -375,7 +331,11 @@ export const Pilot02GitVsGithub: React.FC = () => {
         durationInFrames={SCENE_DURATIONS.cta}
         premountFor={PREMOUNT_FRAMES}
       >
-        <SceneShell sceneIndex={5}>
+        <Serie01SceneShell
+          sceneNumber={6}
+          totalScenes={TOTAL_SCENES}
+          keyword={SCENE_KEYWORDS[5]}
+        >
           <div style={{ ...narrationBoxStyle, minHeight: 44 }}>
             <TextReveal
               text={CTA_TITLE}
@@ -398,7 +358,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
               showCursor={false}
             />
           </div>
-        </SceneShell>
+        </Serie01SceneShell>
       </Sequence>
     </AbsoluteFill>
   );
