@@ -49,9 +49,11 @@ Detailed rules (UI vs Remotion, where to put compositions and primitives): [KM/D
 
 - **KM/Docs** — Project documentation (this README points to it).
 - **KM/Course/** — Course content (Intro, Fullstack, React).
-- **packages/skills/Remotion** — Remotion agent skills (remotion-dev/skills).
+- **packages/skills/Remotion** — Remotion agent skills ([remotion-dev/skills](https://github.com/remotion-dev/skills)). Include in submodule init: `git submodule update --init packages/skills/Remotion` (or full `--recursive`).
 
 For a full clone: `git clone --recurse-submodules <repo-url>`. If already cloned: `git submodule update --init --recursive`.
+
+Layout and symlinks (`remotion-best-practices`, `apps/remotion/.agents/...`): [`packages/skills/README.md`](packages/skills/README.md).
 
 ## Stack and tools
 

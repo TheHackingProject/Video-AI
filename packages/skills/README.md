@@ -2,10 +2,54 @@
 
 This folder collects skills used for video creation and production workflow.
 
+## Layout (single source of truth at monorepo root)
+
+| Path | Role |
+|------|------|
+| `Remotion/` | **Git submodule** → [remotion-dev/skills](https://github.com/remotion-dev/skills.git) (official Remotion agent pack). After clone: `git submodule update --init packages/skills/Remotion`. |
+| `remotion-best-practices` | **Symlink** → `Remotion/skills/remotion` (same `SKILL.md` + `rules/` as upstream). Commit this link so paths stay stable in docs. |
+| `thp-video-generation/` | **Versioned** THP pipeline skill (this repo). |
+
+**App Remotion (`apps/remotion`)** : `apps/remotion/.agents/skills/remotion-best-practices` is a **symlink** to `packages/skills/remotion-best-practices` so Codex/OpenAI-style agents next to the app resolve the same tree as the monorepo — no duplicate file copies.
+
+## Clone / update submodule
+
+```bash
+# Full clone (recommended)
+git clone --recurse-submodules <repo-url>
+
+# Or after a shallow clone
+git submodule update --init packages/skills/Remotion
+```
+
+To advance the Remotion skills pin:
+
+```bash
+cd packages/skills/Remotion
+git fetch origin && git checkout main && git pull --ff-only
+cd ../../..
+git add packages/skills/Remotion
+git commit -m "chore: bump remotion-dev/skills submodule"
+```
+
 ## Skills used in this repo
 
-- `Remotion/` — official Remotion submodule (`@remotion/skills`) for composition patterns, animation, assets, timing, audio, etc.
-- `thp-video-generation/` — **Video-AI project** skill — block choice (text, code, transitions, 3D, diagrams), Storybook → demo → doc workflow, THP / `solarTheme` alignment. Entry: [`thp-video-generation/SKILL.md`](thp-video-generation/SKILL.md); detailed matrix: [`thp-video-generation/references/library-matrix.md`](thp-video-generation/references/library-matrix.md).
+- **`Remotion/`** + **`remotion-best-practices`** — official Remotion rules (`@remotion/skills`), composition patterns, animation, assets, timing, audio, etc.
+- **`thp-video-generation/`** — **Video-AI project** skill — block choice (text, code, transitions, 3D, diagrams), Storybook → demo → doc workflow, THP / `solarTheme` alignment. Entry: [`thp-video-generation/SKILL.md`](thp-video-generation/SKILL.md); matrix: [`thp-video-generation/references/library-matrix.md`](thp-video-generation/references/library-matrix.md).
+
+### Cursor (optional local symlinks)
+
+Cursor loads project skills from **`.cursor/skills/`** (gitignored). From repo root:
+
+```bash
+mkdir -p .cursor/skills
+ln -sf "$(pwd)/packages/skills/thp-video-generation" .cursor/skills/thp-video-generation
+ln -sf "$(pwd)/packages/skills/remotion-best-practices" .cursor/skills/remotion-best-practices
+```
+
+### Windows
+
+Symlinks in the repo require `git config core.symlinks true` and Developer Mode (or run Git as admin). If symlinks are checked out as plain files, re-clone with symlink support enabled.
 
 ## Recommended external skills
 
@@ -17,24 +61,22 @@ This folder collects skills used for video creation and production workflow.
 bunx @mermaid-js/mermaid-cli -i path/to/diagram.mmd -o apps/remotion/public/diagrams/slug/diagram.svg
 ```
 
-**Optional — themed / batch / multiple outputs** — Agent Skill **pretty-mermaid** ([skills.sh entry](https://skills.sh/imxv/pretty-mermaid-skills/pretty-mermaid), repo [imxv/pretty-mermaid-skills](https://github.com/imxv/pretty-mermaid-skills)):
+**Optional — themed / batch** — Agent Skill **pretty-mermaid** ([skills.sh](https://skills.sh/imxv/pretty-mermaid-skills/pretty-mermaid), [imxv/pretty-mermaid-skills](https://github.com/imxv/pretty-mermaid-skills)):
 
 ```bash
 npx skills add https://github.com/imxv/pretty-mermaid-skills --skill pretty-mermaid
 ```
 
-Then use the skill’s `scripts/render.mjs` / `scripts/batch.mjs` from the installed skill directory (see that repo’s `SKILL.md`). For **Cursor**, mirror the installed folder under `.cursor/skills/pretty-mermaid` if your install path is elsewhere (same pattern as `thp-video-generation`).
-
 **When to use which**: prefer `bunx @mermaid-js/mermaid-cli` for minimal CI and `-c mermaid-config.json` alignment with THP ; use **pretty-mermaid** when you need built-in themes, parallel batch renders, or ASCII previews.
 
-**Checklist per video**: after adding or changing diagrams, update `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md` (order: `.mmd` → SVG in `public/` → Storybook if needed → Remotion demo if needed → docs). See [thp-video-generation/references/diagram-asset-pipeline.md](thp-video-generation/references/diagram-asset-pipeline.md).
+**Checklist per video**: update `KM/Docs/video-ai-preparation/diagrams/<slug>/ASSET-PIPELINE.md`. See [thp-video-generation/references/diagram-asset-pipeline.md](thp-video-generation/references/diagram-asset-pipeline.md).
 
-Paths and options: [runbooks/video-ai-development](../../KM/Docs/runbooks/video-ai-development.md) (section 03b, item 3bis). For most THP lesson flows, use **React schematic** [`SchematicFlowChartView`](../../packages/ui/src/lib/diagrams/SchematicFlowChartView.tsx) + [`FlowChart`](../../packages/ui/src/lib/remotion/diagrams/FlowChart.tsx) instead of embedding a small pre-rendered SVG.
+Paths and options: [runbooks/video-ai-development](../../KM/Docs/runbooks/video-ai-development.md) (section 03b, item 3bis).
 
-- AI SVG generation: `@neversight/generate-svg` via agentskill.sh — generate vector illustrations (logos, visuals, icons) exportable as SVG for Remotion scenes.
+- AI SVG generation: `@neversight/generate-svg` via agentskill.sh — vector illustrations for Remotion scenes.
 
 ## Why this workflow
 
-- Keeping Mermaid diagrams as text (`.mmd`) improves diff, review, and versioning.
-- Generating SVG upfront makes Remotion output more stable and deterministic (no Mermaid at video render time).
-- Remotion owns motion (sequences, opacity, masks, zoom, transitions).
+- **Submodule** pins a tested commit of upstream Remotion skills; PRs can bump the pin explicitly.
+- **Symlinks** avoid duplicating tens of rule files under `apps/remotion/.agents/` while keeping agent tooling paths predictable.
+- Keeping Mermaid as `.mmd` improves diff/review; generating SVG before render keeps Remotion deterministic.

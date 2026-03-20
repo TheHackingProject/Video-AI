@@ -8,7 +8,7 @@ metadata:
 
 # THP Video generation (Video-AI monorepo)
 
-Project-specific skill. Pair with **remotion-best-practices** from `packages/skills/Remotion/skills/remotion/SKILL.md` for low-level Remotion rules.
+Project-specific skill. Pair with **remotion-best-practices** from `packages/skills/remotion-best-practices/SKILL.md` (symlink to `Remotion/skills/remotion`; ensure submodule `packages/skills/Remotion` is initialized) for low-level Remotion rules.
 
 ## When to use
 
@@ -103,3 +103,11 @@ mkdir -p .cursor/skills && ln -sf "$(pwd)/packages/skills/thp-video-generation" 
 ```
 
 Check that `.cursor/skills/thp-video-generation/SKILL.md` exists. Same pattern as other project skills (e.g. `thp-solarpunk-visual`).
+
+Optional — symlink **remotion-best-practices** for Cursor as well:
+
+```bash
+ln -sf "$(pwd)/packages/skills/remotion-best-practices" .cursor/skills/remotion-best-practices
+```
+
+Requires `git submodule update --init packages/skills/Remotion` so the link resolves. See [`packages/skills/README.md`](../README.md).
