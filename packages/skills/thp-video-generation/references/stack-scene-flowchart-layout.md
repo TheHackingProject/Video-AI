@@ -20,14 +20,16 @@ Nested `Sequence` + `position: absolute` was a common pattern in serie-01 pilots
    - Use an outer wrapper: **`flex: 1`**, **`minHeight: 0`**, **`display: flex`**, **`flexDirection: column`**, **`justifyContent: "center"`** — this **vertically centers** the whole block so it does not stick to the top or bottom.
    - Inside that, one **group** (no growing spacer between copy and chart): **narration** → **fixed `marginTop` (e.g. 28px)** → **diagram row** (`display: flex`, `justifyContent: "center"`).
 2. **Do not** insert **`flex: 1`** between narration and `FlowChart`. That absorbs all extra height and **pins the chart to the progress bar** with a large empty band above — bad UX.
-3. Keep the diagram **in normal flow** (no `position: absolute` for placement).
-4. Delay the diagram **fade** with `FadeIn` `startFrame={…}` (scene-local frames). Delay node springs with `FlowChart` `startFrame={fadeStart + nodeOffset}` (export a single constant from `*-content.ts`, e.g. `WORKFLOW_FLOWCHART_START_FRAME`).
-5. Use moderate `bottomPadding` on the shell to clear the global `ProgressBar`.
+3. **Lesson scenes (body + terminal)** — same idea: avoid **`position: absolute; top: …`** for copy and **`bottom: …`** for `Terminal` in the same slide (creates a tall empty strip). Prefer one column: **`justifyContent: "center"`** on a full-height padded wrapper, copy block, then **`marginTop`** and in-flow `Terminal` inside its timed **`Sequence` with `layout="none"`** — otherwise Remotion wraps the sequence in **`AbsoluteFill`** and the terminal **overlays** the slide (often top), breaking flex centering. Ref. `packages/skills/Remotion/skills/remotion/rules/sequencing.md`.
+4. Keep the diagram **in normal flow** (no `position: absolute` for placement).
+5. Delay the diagram **fade** with `FadeIn` `startFrame={…}` (scene-local frames). Delay node springs with `FlowChart` `startFrame={fadeStart + nodeOffset}` (export a single constant from `*-content.ts`, e.g. `WORKFLOW_FLOWCHART_START_FRAME`).
+6. Use moderate `bottomPadding` on the shell to clear the global `ProgressBar`.
 
 ## Reference implementations
 
-- `apps/remotion/src/remotion/compositions/serie-01/Pilot02GitVsGithub.tsx` — GitHub scene + 2-node `FlowChart`.
-- `apps/remotion/src/remotion/compositions/serie-01/Pilot03Commit.tsx` — workflow scene + 3-node `FlowChart`.
+- `apps/remotion/src/remotion/compositions/serie-01/Pilot01Prerequis.tsx` — **OUVRIR** (step1): stacked beats (analogy → pills → OS line → code) in `STEP_LESSON_MAIN_COLUMN` + `Sequence` `layout="none"`; recap + **pwd / ls** same column pattern for `FlowChart` / `Terminal`.
+- `apps/remotion/src/remotion/compositions/serie-01/Pilot02GitVsGithub.tsx` — GitHub scene + 2-node `FlowChart` (`Serie01SceneShell` `layout="stack"`).
+- `apps/remotion/src/remotion/compositions/serie-01/Pilot03Commit.tsx` — workflow scene + 3-node `FlowChart` (`Serie01SceneShell` `layout="stack"`).
 
 ## Related
 

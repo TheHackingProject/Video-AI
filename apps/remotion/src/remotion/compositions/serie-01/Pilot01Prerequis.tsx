@@ -33,6 +33,7 @@ import {
   OS_PILLS,
   PREMOUNT_FRAMES,
   RECAP_FLOWCHART,
+  RECAP_FLOWCHART_START_FRAME,
   RECAP_LINE1,
   RECAP_LINE2,
   RECAP_LINE2_START,
@@ -95,6 +96,24 @@ const heroGlitchWrapStyle: React.CSSProperties = {
   justifyContent: "center",
   paddingLeft: 20,
   paddingRight: 20,
+};
+
+/**
+ * Pilot01 lesson scenes (step1 OUVRIR + pwd + ls): centered column, in-flow beats.
+ * Avoid fixed `top`/`bottom` absolute strips — use `Sequence` + `layout="none"`.
+ */
+const STEP_LESSON_MAIN_COLUMN: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  boxSizing: "border-box",
+  paddingTop: 88,
+  paddingLeft: 40,
+  paddingRight: 40,
+  paddingBottom: 132,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 function LessonStepsFooter({
@@ -205,8 +224,6 @@ export const Pilot01Prerequis: React.FC = () => {
   const { width, height, durationInFrames } = useVideoConfig();
 
   const bgGradient = `radial-gradient(ellipse at center, ${demoShowcaseColors.backgroundGlow} 0%, ${tc.background} 72%, #030806 100%)`;
-
-  const recapFlowDuration = SCENE_DURATIONS.recap - RECAP_FLOWCHART.from;
 
   return (
     <AbsoluteFill style={{ background: bgGradient }}>
@@ -363,114 +380,101 @@ export const Pilot01Prerequis: React.FC = () => {
             <AbsoluteFill>
               <LessonStepsFooter activeStep={1} theme={solarTheme} />
 
-              <Sequence
-                from={STEP1_BEATS.analogy.from}
-                durationInFrames={STEP1_BEATS.analogy.duration}
-                layout="none"
-              >
+              <div style={STEP_LESSON_MAIN_COLUMN}>
                 <div
                   style={{
-                    position: "absolute",
-                    top: 100,
-                    left: 40,
-                    right: 40,
-                  }}
-                >
-                  <div style={narrationBoxStyle}>
-                    <Typewriter
-                      text={STEP1_ANALOGY}
-                      startFrame={0}
-                      charsPerSecond={STEP1_ANALOGY_CPS}
-                      theme={solarTheme}
-                      fontSize={22}
-                      color={tc.text}
-                      showCursor={SHOW_TYPEWRITER_CURSOR}
-                    />
-                  </div>
-                </div>
-              </Sequence>
-
-              <Sequence
-                from={STEP1_BEATS.pills.from}
-                durationInFrames={STEP1_BEATS.pills.duration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 310,
-                    left: 40,
-                    right: 40,
-                  }}
-                >
-                  <FadeIn
-                    startFrame={0}
-                    durationInFrames={16}
-                    translateY={14}
-                  >
-                    <OsPillsRow theme={solarTheme} />
-                  </FadeIn>
-                </div>
-              </Sequence>
-
-              <Sequence
-                from={STEP1_BEATS.osLine.from}
-                durationInFrames={STEP1_BEATS.osLine.duration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 480,
-                    left: 40,
-                    right: 40,
-                  }}
-                >
-                  <div style={narrationBoxStyle}>
-                    <WordByWord
-                      text={STEP1_OS_LINE}
-                      startFrame={0}
-                      wordDelay={STEP1_OS_WORD_DELAY}
-                      theme={solarTheme}
-                      fontSize={19}
-                      color={tc.textMuted}
-                      highlightColor={tc.success}
-                    />
-                  </div>
-                </div>
-              </Sequence>
-
-              <Sequence
-                from={STEP1_BEATS.code.from}
-                durationInFrames={STEP1_BEATS.code.duration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 150,
-                    left: 40,
-                    right: 40,
+                    width: "100%",
+                    maxWidth: 920,
+                    flexShrink: 0,
                     display: "flex",
-                    justifyContent: "center",
-                    zIndex: 6,
+                    flexDirection: "column",
+                    alignItems: "stretch",
                   }}
                 >
-                  <FadeIn
-                    startFrame={0}
-                    durationInFrames={18}
-                    translateY={12}
+                  <Sequence
+                    from={STEP1_BEATS.analogy.from}
+                    durationInFrames={STEP1_BEATS.analogy.duration}
+                    layout="none"
                   >
-                    <div style={{ width: "100%", maxWidth: 720 }}>
-                      <CodeBlockStatic
-                        code={STEP1_CODE}
-                        showLineNumbers={false}
-                        title="terminal"
+                    <div style={narrationBoxStyle}>
+                      <Typewriter
+                        text={STEP1_ANALOGY}
+                        startFrame={0}
+                        charsPerSecond={STEP1_ANALOGY_CPS}
+                        theme={solarTheme}
+                        fontSize={22}
+                        color={tc.text}
+                        showCursor={SHOW_TYPEWRITER_CURSOR}
                       />
                     </div>
-                  </FadeIn>
+                  </Sequence>
+
+                  <Sequence
+                    from={STEP1_BEATS.pills.from}
+                    durationInFrames={STEP1_BEATS.pills.duration}
+                    layout="none"
+                  >
+                    <div style={{ marginTop: 24 }}>
+                      <FadeIn
+                        startFrame={0}
+                        durationInFrames={16}
+                        translateY={14}
+                      >
+                        <OsPillsRow theme={solarTheme} />
+                      </FadeIn>
+                    </div>
+                  </Sequence>
+
+                  <Sequence
+                    from={STEP1_BEATS.osLine.from}
+                    durationInFrames={STEP1_BEATS.osLine.duration}
+                    layout="none"
+                  >
+                    <div style={{ marginTop: 20 }}>
+                      <div style={narrationBoxStyle}>
+                        <WordByWord
+                          text={STEP1_OS_LINE}
+                          startFrame={0}
+                          wordDelay={STEP1_OS_WORD_DELAY}
+                          theme={solarTheme}
+                          fontSize={19}
+                          color={tc.textMuted}
+                          highlightColor={tc.success}
+                        />
+                      </div>
+                    </div>
+                  </Sequence>
+
+                  <Sequence
+                    from={STEP1_BEATS.code.from}
+                    durationInFrames={STEP1_BEATS.code.duration}
+                    layout="none"
+                  >
+                    <div
+                      style={{
+                        marginTop: 24,
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <FadeIn
+                        startFrame={0}
+                        durationInFrames={18}
+                        translateY={12}
+                      >
+                        <div style={{ width: "100%", maxWidth: 720 }}>
+                          <CodeBlockStatic
+                            code={STEP1_CODE}
+                            showLineNumbers={false}
+                            title="terminal"
+                          />
+                        </div>
+                      </FadeIn>
+                    </div>
+                  </Sequence>
                 </div>
-              </Sequence>
+              </div>
             </AbsoluteFill>
           </FadeSlide>
         </AbsoluteFill>
@@ -493,92 +497,96 @@ export const Pilot01Prerequis: React.FC = () => {
             <AbsoluteFill>
               <LessonStepsFooter activeStep={2} theme={solarTheme} />
 
-              <div
-                style={{
-                  position: "absolute",
-                  top: 96,
-                  left: 40,
-                  right: 40,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
+              <div style={STEP_LESSON_MAIN_COLUMN}>
                 <div
                   style={{
                     width: "100%",
                     maxWidth: 920,
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 14,
+                    flexShrink: 0,
                   }}
                 >
-            <FadeIn startFrame={0} durationInFrames={14} translateY={10}>
-              <ThpTerminal size={36} color={tc.primary} strokeWidth={2} aria-hidden />
-            </FadeIn>
-            <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
-              <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
-                <Typewriter
-                  text={STEP2_PARA1}
-                  startFrame={0}
-                  charsPerSecond={STEP2_BODY_CPS}
-                  theme={solarTheme}
-                  fontSize={21}
-                  color={tc.text}
-                  showCursor={SHOW_TYPEWRITER_CURSOR}
-                />
-              </div>
-              <div
-                style={{
-                  marginTop: 18,
-                  minHeight: 88,
-                  ...narrationBoxStyle,
-                  textAlign: "left",
-                }}
-              >
-                <Typewriter
-                  text={STEP2_PARA2}
-                  startFrame={STEP2_PARA2_START}
-                  charsPerSecond={STEP2_BODY_CPS}
-                  theme={solarTheme}
-                  fontSize={21}
-                  color={tc.text}
-                  showCursor={SHOW_TYPEWRITER_CURSOR}
-                />
-              </div>
-            </div>
-                </div>
-              </div>
-
-              <Sequence
-                from={STEP2_BEATS.terminal.from}
-                durationInFrames={STEP2_BEATS.terminal.duration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 150,
-                    left: 48,
-                    right: 48,
-                    display: "flex",
-                    justifyContent: "center",
-                    zIndex: 6,
-                  }}
-                >
-                  <div style={{ width: "100%", maxWidth: 640 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 14,
+                    }}
+                  >
                     <FadeIn startFrame={0} durationInFrames={14} translateY={10}>
-                      <Terminal
-                        lines={TERMINAL_PWD_LINES}
-                        title="terminal"
-                        startFrame={TERMINAL_BLOCK_START_IN_PARENT}
-                        typeSpeed={TERMINAL_TYPE_SPEED}
-                        prompt={TERMINAL_PROMPT}
-                        theme={solarTheme}
+                      <ThpTerminal
+                        size={36}
+                        color={tc.primary}
+                        strokeWidth={2}
+                        aria-hidden
                       />
                     </FadeIn>
+                    <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
+                      <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
+                        <Typewriter
+                          text={STEP2_PARA1}
+                          startFrame={0}
+                          charsPerSecond={STEP2_BODY_CPS}
+                          theme={solarTheme}
+                          fontSize={21}
+                          color={tc.text}
+                          showCursor={SHOW_TYPEWRITER_CURSOR}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          marginTop: 18,
+                          minHeight: 88,
+                          ...narrationBoxStyle,
+                          textAlign: "left",
+                        }}
+                      >
+                        <Typewriter
+                          text={STEP2_PARA2}
+                          startFrame={STEP2_PARA2_START}
+                          charsPerSecond={STEP2_BODY_CPS}
+                          theme={solarTheme}
+                          fontSize={21}
+                          color={tc.text}
+                          showCursor={SHOW_TYPEWRITER_CURSOR}
+                        />
+                      </div>
+                    </div>
                   </div>
+
+                  {/* layout="none": default Sequence wraps AbsoluteFill — breaks flex column (terminal jumps to top). */}
+                  <Sequence
+                    from={STEP2_BEATS.terminal.from}
+                    durationInFrames={STEP2_BEATS.terminal.duration}
+                    layout="none"
+                  >
+                    <div
+                      style={{
+                        marginTop: 22,
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <div style={{ width: "100%", maxWidth: 640 }}>
+                        <FadeIn
+                          startFrame={0}
+                          durationInFrames={14}
+                          translateY={10}
+                        >
+                          <Terminal
+                            lines={TERMINAL_PWD_LINES}
+                            title="terminal"
+                            startFrame={TERMINAL_BLOCK_START_IN_PARENT}
+                            typeSpeed={TERMINAL_TYPE_SPEED}
+                            prompt={TERMINAL_PROMPT}
+                            theme={solarTheme}
+                          />
+                        </FadeIn>
+                      </div>
+                    </div>
+                  </Sequence>
                 </div>
-              </Sequence>
+              </div>
             </AbsoluteFill>
           </FadeSlide>
         </AbsoluteFill>
@@ -601,92 +609,96 @@ export const Pilot01Prerequis: React.FC = () => {
             <AbsoluteFill>
               <LessonStepsFooter activeStep={3} theme={solarTheme} />
 
-              <div
-                style={{
-                  position: "absolute",
-                  top: 96,
-                  left: 40,
-                  right: 40,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
+              <div style={STEP_LESSON_MAIN_COLUMN}>
                 <div
                   style={{
                     width: "100%",
                     maxWidth: 920,
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 14,
+                    flexShrink: 0,
                   }}
                 >
-                <FadeIn startFrame={0} durationInFrames={12} translateY={10}>
-                  <ThpTerminal size={36} color={tc.secondary} strokeWidth={2} aria-hidden />
-                </FadeIn>
-                <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
-                  <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
-                    <Typewriter
-                      text={STEP3_PARA1}
-                      startFrame={0}
-                      charsPerSecond={STEP3_BODY_CPS}
-                      theme={solarTheme}
-                      fontSize={21}
-                      color={tc.text}
-                      showCursor={SHOW_TYPEWRITER_CURSOR}
-                    />
-                  </div>
                   <div
                     style={{
-                      marginTop: 16,
-                      minHeight: 72,
-                      ...narrationBoxStyle,
-                      textAlign: "left",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 14,
                     }}
                   >
-                    <Typewriter
-                      text={STEP3_PARA2}
-                      startFrame={STEP3_PARA2_START}
-                      charsPerSecond={STEP3_BODY_CPS}
-                      theme={solarTheme}
-                      fontSize={21}
-                      color={tc.text}
-                      showCursor={SHOW_TYPEWRITER_CURSOR}
-                    />
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <Sequence
-                from={STEP3_BEATS.terminal.from}
-                durationInFrames={STEP3_BEATS.terminal.duration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 150,
-                    left: 48,
-                    right: 48,
-                    display: "flex",
-                    justifyContent: "center",
-                    zIndex: 6,
-                  }}
-                >
-                  <div style={{ width: "100%", maxWidth: 640 }}>
                     <FadeIn startFrame={0} durationInFrames={12} translateY={10}>
-                      <Terminal
-                        lines={TERMINAL_LS_LINES}
-                        title="terminal"
-                        startFrame={TERMINAL_BLOCK_START_IN_PARENT}
-                        typeSpeed={TERMINAL_TYPE_SPEED}
-                        prompt={TERMINAL_PROMPT}
-                        theme={solarTheme}
+                      <ThpTerminal
+                        size={36}
+                        color={tc.secondary}
+                        strokeWidth={2}
+                        aria-hidden
                       />
                     </FadeIn>
+                    <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
+                      <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
+                        <Typewriter
+                          text={STEP3_PARA1}
+                          startFrame={0}
+                          charsPerSecond={STEP3_BODY_CPS}
+                          theme={solarTheme}
+                          fontSize={21}
+                          color={tc.text}
+                          showCursor={SHOW_TYPEWRITER_CURSOR}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          marginTop: 16,
+                          minHeight: 72,
+                          ...narrationBoxStyle,
+                          textAlign: "left",
+                        }}
+                      >
+                        <Typewriter
+                          text={STEP3_PARA2}
+                          startFrame={STEP3_PARA2_START}
+                          charsPerSecond={STEP3_BODY_CPS}
+                          theme={solarTheme}
+                          fontSize={21}
+                          color={tc.text}
+                          showCursor={SHOW_TYPEWRITER_CURSOR}
+                        />
+                      </div>
+                    </div>
                   </div>
+
+                  {/* layout="none": keep Terminal in flow below copy (sequencing.md). */}
+                  <Sequence
+                    from={STEP3_BEATS.terminal.from}
+                    durationInFrames={STEP3_BEATS.terminal.duration}
+                    layout="none"
+                  >
+                    <div
+                      style={{
+                        marginTop: 22,
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <div style={{ width: "100%", maxWidth: 640 }}>
+                        <FadeIn
+                          startFrame={0}
+                          durationInFrames={12}
+                          translateY={10}
+                        >
+                          <Terminal
+                            lines={TERMINAL_LS_LINES}
+                            title="terminal"
+                            startFrame={TERMINAL_BLOCK_START_IN_PARENT}
+                            typeSpeed={TERMINAL_TYPE_SPEED}
+                            prompt={TERMINAL_PROMPT}
+                            theme={solarTheme}
+                          />
+                        </FadeIn>
+                      </div>
+                    </div>
+                  </Sequence>
                 </div>
-              </Sequence>
+              </div>
             </AbsoluteFill>
           </FadeSlide>
         </AbsoluteFill>
@@ -709,69 +721,91 @@ export const Pilot01Prerequis: React.FC = () => {
             <AbsoluteFill>
               <div
                 style={{
+                  width: "100%",
+                  height: "100%",
+                  boxSizing: "border-box",
                   paddingTop: 88,
                   paddingLeft: 40,
                   paddingRight: 40,
+                  paddingBottom: 56,
                   display: "flex",
                   flexDirection: "column",
+                  justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <div style={{ ...narrationBoxStyle, minHeight: 120 }}>
-                  <Typewriter
-                    text={RECAP_LINE1}
-                    startFrame={0}
-                    charsPerSecond={RECAP_TYPE_CPS}
-                    theme={solarTheme}
-                    fontSize={21}
-                    color={tc.text}
-                    showCursor={SHOW_TYPEWRITER_CURSOR}
-                  />
-                </div>
-                <div style={{ ...narrationBoxStyle, minHeight: 88, marginTop: 12 }}>
-                  <WordByWord
-                    text={RECAP_LINE2}
-                    startFrame={RECAP_LINE2_START}
-                    wordDelay={RECAP_LINE2_WORD_DELAY}
-                    theme={solarTheme}
-                    fontSize={21}
-                    color={tc.text}
-                    highlightColor={tc.accent}
-                  />
+                <div style={{ width: "100%", maxWidth: 920, flexShrink: 0 }}>
+                  <div style={{ ...narrationBoxStyle, minHeight: 120 }}>
+                    <Typewriter
+                      text={RECAP_LINE1}
+                      startFrame={0}
+                      charsPerSecond={RECAP_TYPE_CPS}
+                      theme={solarTheme}
+                      fontSize={21}
+                      color={tc.text}
+                      showCursor={SHOW_TYPEWRITER_CURSOR}
+                    />
+                  </div>
+                  <div style={{ ...narrationBoxStyle, minHeight: 88, marginTop: 12 }}>
+                    <WordByWord
+                      text={RECAP_LINE2}
+                      startFrame={RECAP_LINE2_START}
+                      wordDelay={RECAP_LINE2_WORD_DELAY}
+                      theme={solarTheme}
+                      fontSize={21}
+                      color={tc.text}
+                      highlightColor={tc.accent}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      marginTop: 28,
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <FadeIn
+                      startFrame={RECAP_FLOWCHART.from}
+                      durationInFrames={16}
+                      translateY={12}
+                    >
+                      <FlowChart
+                        nodes={[
+                          {
+                            id: "1",
+                            label: "Terminal",
+                            icon: "▸",
+                            color: tc.primary,
+                          },
+                          {
+                            id: "2",
+                            label: "pwd",
+                            icon: "📍",
+                            color: tc.accent,
+                          },
+                          {
+                            id: "3",
+                            label: "ls",
+                            icon: "📂",
+                            color: tc.secondary,
+                          },
+                          {
+                            id: "4",
+                            label: "Prêt",
+                            icon: "✓",
+                            color: tc.success,
+                          },
+                        ]}
+                        startFrame={RECAP_FLOWCHART_START_FRAME}
+                        nodeDelay={RECAP_FLOWCHART.nodeDelay}
+                        direction="horizontal"
+                        theme={solarTheme}
+                      />
+                    </FadeIn>
+                  </div>
                 </div>
               </div>
-
-              <Sequence
-                from={RECAP_FLOWCHART.from}
-                durationInFrames={recapFlowDuration}
-                layout="none"
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 40,
-                    right: 40,
-                    bottom: 72,
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <FadeIn startFrame={0} durationInFrames={16} translateY={12}>
-                    <FlowChart
-                      nodes={[
-                        { id: "1", label: "Terminal", icon: "▸", color: tc.primary },
-                        { id: "2", label: "pwd", icon: "📍", color: tc.accent },
-                        { id: "3", label: "ls", icon: "📂", color: tc.secondary },
-                        { id: "4", label: "Prêt", icon: "✓", color: tc.success },
-                      ]}
-                      startFrame={RECAP_FLOWCHART.startFrameLocal}
-                      nodeDelay={RECAP_FLOWCHART.nodeDelay}
-                      direction="horizontal"
-                      theme={solarTheme}
-                    />
-                  </FadeIn>
-                </div>
-              </Sequence>
             </AbsoluteFill>
           </FadeSlide>
         </AbsoluteFill>

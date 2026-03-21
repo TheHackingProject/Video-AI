@@ -213,6 +213,10 @@ export const RECAP_FLOWCHART = {
   startFrameLocal: 12,
 } as const;
 
+/** FlowChart node springs — scene-local frames (recap Sequence). */
+export const RECAP_FLOWCHART_START_FRAME =
+  RECAP_FLOWCHART.from + RECAP_FLOWCHART.startFrameLocal;
+
 // --- CTA (TextReveal title + Typewriter subtitle — §04 / serie parity with pilot 02) ---
 export const CTA_TITLE = "À suivre : Git vs GitHub";
 export const CTA_SUBTITLE = "La suite du parcours";
