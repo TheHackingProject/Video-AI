@@ -81,10 +81,20 @@ const particleColors = [
 const VINE_TILE_PATTERN = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 Q45 15 30 30 Q15 45 30 60' fill='none' stroke='%2322c55e' stroke-width='1'/%3E%3C/svg%3E")`;
 
 const narrationBoxStyle: React.CSSProperties = {
-  maxWidth: 820,
+  width: "100%",
+  maxWidth: 920,
   margin: "0 auto",
   textAlign: "center",
   lineHeight: 1.65,
+  boxSizing: "border-box",
+};
+
+const heroGlitchWrapStyle: React.CSSProperties = {
+  ...narrationBoxStyle,
+  display: "flex",
+  justifyContent: "center",
+  paddingLeft: 20,
+  paddingRight: 20,
 };
 
 function LessonStepsFooter({
@@ -272,7 +282,7 @@ export const Pilot01Prerequis: React.FC = () => {
           keyword={PILOT01_SCENE_KEYWORDS[0]}
           transition="zoom-blur"
         >
-          <div style={narrationBoxStyle}>
+          <div style={heroGlitchWrapStyle}>
             <GlitchText
               text={TITLE}
               startFrame={0}
@@ -487,19 +497,25 @@ export const Pilot01Prerequis: React.FC = () => {
                 style={{
                   position: "absolute",
                   top: 96,
-                  left: 48,
-                  right: 48,
+                  left: 40,
+                  right: 40,
                   display: "flex",
-                  alignItems: "flex-start",
-                  gap: 14,
-                  maxWidth: 920,
-                  margin: "0 auto",
+                  justifyContent: "center",
                 }}
               >
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: 920,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 14,
+                  }}
+                >
             <FadeIn startFrame={0} durationInFrames={14} translateY={10}>
               <ThpTerminal size={36} color={tc.primary} strokeWidth={2} aria-hidden />
             </FadeIn>
-            <div style={{ flex: 1, paddingTop: 4 }}>
+            <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
               <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
                 <Typewriter
                   text={STEP2_PARA1}
@@ -530,7 +546,8 @@ export const Pilot01Prerequis: React.FC = () => {
                 />
               </div>
             </div>
-          </div>
+                </div>
+              </div>
 
               <Sequence
                 from={STEP2_BEATS.terminal.from}
@@ -588,19 +605,25 @@ export const Pilot01Prerequis: React.FC = () => {
                 style={{
                   position: "absolute",
                   top: 96,
-                  left: 48,
-                  right: 48,
+                  left: 40,
+                  right: 40,
                   display: "flex",
-                  alignItems: "flex-start",
-                  gap: 14,
-                  maxWidth: 920,
-                  margin: "0 auto",
+                  justifyContent: "center",
                 }}
               >
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: 920,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 14,
+                  }}
+                >
                 <FadeIn startFrame={0} durationInFrames={12} translateY={10}>
                   <ThpTerminal size={36} color={tc.secondary} strokeWidth={2} aria-hidden />
                 </FadeIn>
-                <div style={{ flex: 1, paddingTop: 4 }}>
+                <div style={{ flex: 1, paddingTop: 4, minWidth: 0 }}>
                   <div style={{ ...narrationBoxStyle, textAlign: "left" }}>
                     <Typewriter
                       text={STEP3_PARA1}
@@ -630,6 +653,7 @@ export const Pilot01Prerequis: React.FC = () => {
                       showCursor={SHOW_TYPEWRITER_CURSOR}
                     />
                   </div>
+                </div>
                 </div>
               </div>
 
@@ -688,6 +712,9 @@ export const Pilot01Prerequis: React.FC = () => {
                   paddingTop: 88,
                   paddingLeft: 40,
                   paddingRight: 40,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
                 <div style={{ ...narrationBoxStyle, minHeight: 120 }}>

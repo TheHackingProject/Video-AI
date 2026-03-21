@@ -1,9 +1,5 @@
 import type React from "react";
-import {
-  AbsoluteFill,
-  Sequence,
-  useVideoConfig,
-} from "remotion";
+import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
 import { FadeIn } from "@repo/remotion-lib";
 import {
   FlowChart,
@@ -23,27 +19,16 @@ import {
   CTA_TITLE,
   CTA_TITLE_REVEAL_DURATION,
   FRAME,
-  GIT_BODY,
-  GIT_BODY_CPS,
-  GIT_BODY_START_FRAME,
-  GIT_TITLE,
-  GIT_TITLE_REVEAL_DURATION,
-  GITHUB_BODY,
-  GITHUB_BODY_CPS,
-  GITHUB_BODY_START_FRAME,
-  GITHUB_CALLOUT,
-  GITHUB_CALLOUT_CPS,
-  GITHUB_CALLOUT_START_FRAME,
-  GITHUB_FLOW_FROM_LOCAL,
-  GITHUB_FLOW_NODE_DELAY,
-  GITHUB_FLOWCHART_START_FRAME,
-  GITHUB_TITLE,
-  GITHUB_TITLE_REVEAL_DURATION,
   HOOK_CPS,
   HOOK_TEXT,
   PREMOUNT_FRAMES,
   RECAP_CPS,
   RECAP_TEXT,
+  SAVE_BODY,
+  SAVE_BODY_CPS,
+  SAVE_BODY_START_FRAME,
+  SAVE_TITLE,
+  SAVE_TITLE_REVEAL_DURATION,
   SCENE_DURATIONS,
   SCENE_KEYWORDS,
   TITLE,
@@ -52,7 +37,15 @@ import {
   TITLE_SUBTITLE_REVEAL_DURATION,
   TITLE_SUBTITLE_START_FRAME,
   TOTAL_SCENES,
-} from "./pilot02-content";
+  WORKFLOW_BODY,
+  WORKFLOW_BODY_CPS,
+  WORKFLOW_BODY_START_FRAME,
+  WORKFLOW_FLOW_FROM_LOCAL,
+  WORKFLOW_FLOW_NODE_DELAY,
+  WORKFLOW_FLOWCHART_START_FRAME,
+  WORKFLOW_TITLE,
+  WORKFLOW_TITLE_REVEAL_DURATION,
+} from "./pilot03-content";
 
 const tc = solarTheme.colors;
 const particleColors = [tc.primary, tc.secondary, tc.accent, tc.success];
@@ -67,7 +60,6 @@ const narrationBoxStyle: React.CSSProperties = {
   boxSizing: "border-box",
 };
 
-/** Glitch layers use negative offset; flex + padding keeps optical center on frame. */
 const heroGlitchWrapStyle: React.CSSProperties = {
   ...narrationBoxStyle,
   display: "flex",
@@ -76,7 +68,7 @@ const heroGlitchWrapStyle: React.CSSProperties = {
   paddingRight: 20,
 };
 
-export const Pilot02GitVsGithub: React.FC = () => {
+export const Pilot03Commit: React.FC = () => {
   const { width, height, durationInFrames } = useVideoConfig();
 
   const bgGradient = `radial-gradient(ellipse at center, ${demoShowcaseColors.backgroundGlow} 0%, ${tc.background} 72%, #030806 100%)`;
@@ -153,7 +145,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={1}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[0]}
-          transition="zoom-blur"
+          transition="wipe-left"
         >
           <div style={heroGlitchWrapStyle}>
             <GlitchText
@@ -192,7 +184,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={2}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[1]}
-          transition="wipe-left"
+          transition="zoom-blur"
         >
           <div style={{ ...narrationBoxStyle, minHeight: 140 }}>
             <Typewriter
@@ -209,8 +201,8 @@ export const Pilot02GitVsGithub: React.FC = () => {
       </Sequence>
 
       <Sequence
-        from={FRAME.gitConcept}
-        durationInFrames={SCENE_DURATIONS.gitConcept}
+        from={FRAME.saveConcept}
+        durationInFrames={SCENE_DURATIONS.saveConcept}
         premountFor={PREMOUNT_FRAMES}
       >
         <Serie01SceneShell
@@ -220,9 +212,9 @@ export const Pilot02GitVsGithub: React.FC = () => {
         >
           <div style={narrationBoxStyle}>
             <TextReveal
-              text={GIT_TITLE}
+              text={SAVE_TITLE}
               startFrame={0}
-              duration={GIT_TITLE_REVEAL_DURATION}
+              duration={SAVE_TITLE_REVEAL_DURATION}
               theme={solarTheme}
               fontSize={solarTheme.fontSizes.xxl}
               color={tc.text}
@@ -230,9 +222,9 @@ export const Pilot02GitVsGithub: React.FC = () => {
             />
             <div style={{ marginTop: 20, minHeight: 120 }}>
               <Typewriter
-                text={GIT_BODY}
-                startFrame={GIT_BODY_START_FRAME}
-                charsPerSecond={GIT_BODY_CPS}
+                text={SAVE_BODY}
+                startFrame={SAVE_BODY_START_FRAME}
+                charsPerSecond={SAVE_BODY_CPS}
                 theme={solarTheme}
                 fontSize={22}
                 color={tc.textMuted}
@@ -244,8 +236,8 @@ export const Pilot02GitVsGithub: React.FC = () => {
       </Sequence>
 
       <Sequence
-        from={FRAME.githubConcept}
-        durationInFrames={SCENE_DURATIONS.githubConcept}
+        from={FRAME.workflowConcept}
+        durationInFrames={SCENE_DURATIONS.workflowConcept}
         premountFor={PREMOUNT_FRAMES}
       >
         <Serie01SceneShell
@@ -266,37 +258,29 @@ export const Pilot02GitVsGithub: React.FC = () => {
               width: "100%",
             }}
           >
+            {/*
+              One visual group: copy + fixed gap + FlowChart. Do not put flex:1 between
+              text and chart — it pins the diagram to the progress bar with a huge void.
+            */}
             <div style={{ width: "100%", flexShrink: 0 }}>
               <div style={{ ...narrationBoxStyle, textAlign: "center" }}>
                 <TextReveal
-                  text={GITHUB_TITLE}
+                  text={WORKFLOW_TITLE}
                   startFrame={0}
-                  duration={GITHUB_TITLE_REVEAL_DURATION}
+                  duration={WORKFLOW_TITLE_REVEAL_DURATION}
                   theme={solarTheme}
                   fontSize={solarTheme.fontSizes.xxl}
                   color={tc.text}
                   direction="left"
                 />
-                <div style={{ marginTop: 18, minHeight: 100 }}>
+                <div style={{ marginTop: 18, minHeight: 88 }}>
                   <Typewriter
-                    text={GITHUB_BODY}
-                    startFrame={GITHUB_BODY_START_FRAME}
-                    charsPerSecond={GITHUB_BODY_CPS}
+                    text={WORKFLOW_BODY}
+                    startFrame={WORKFLOW_BODY_START_FRAME}
+                    charsPerSecond={WORKFLOW_BODY_CPS}
                     theme={solarTheme}
                     fontSize={22}
                     color={tc.textMuted}
-                    showCursor={false}
-                  />
-                </div>
-                <div style={{ marginTop: 12, minHeight: 40 }}>
-                  <Typewriter
-                    text={GITHUB_CALLOUT}
-                    startFrame={GITHUB_CALLOUT_START_FRAME}
-                    charsPerSecond={GITHUB_CALLOUT_CPS}
-                    theme={solarTheme}
-                    fontSize={20}
-                    fontFamily={solarTheme.fonts.title}
-                    color={tc.accent}
                     showCursor={false}
                   />
                 </div>
@@ -310,7 +294,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
                 }}
               >
                 <FadeIn
-                  startFrame={GITHUB_FLOW_FROM_LOCAL}
+                  startFrame={WORKFLOW_FLOW_FROM_LOCAL}
                   durationInFrames={16}
                   translateY={8}
                 >
@@ -318,21 +302,28 @@ export const Pilot02GitVsGithub: React.FC = () => {
                     nodes={[
                       {
                         id: "1",
-                        label: "Git",
-                        subtitle: "sur ta machine",
-                        icon: "▸",
+                        label: "Modifier",
+                        subtitle: "tes fichiers",
+                        icon: "✎",
                         color: tc.primary,
                       },
                       {
                         id: "2",
-                        label: "GitHub",
-                        subtitle: "en ligne",
-                        icon: "☁",
+                        label: "Enregistrer",
+                        subtitle: "avec Git",
+                        icon: "◆",
                         color: tc.secondary,
                       },
+                      {
+                        id: "3",
+                        label: "Commit",
+                        subtitle: "dans l’historique",
+                        icon: "▸",
+                        color: tc.accent,
+                      },
                     ]}
-                    startFrame={GITHUB_FLOWCHART_START_FRAME}
-                    nodeDelay={GITHUB_FLOW_NODE_DELAY}
+                    startFrame={WORKFLOW_FLOWCHART_START_FRAME}
+                    nodeDelay={WORKFLOW_FLOW_NODE_DELAY}
                     direction="horizontal"
                     theme={solarTheme}
                   />
@@ -352,6 +343,7 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={5}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[4]}
+          transition="wipe-left"
         >
           <div style={{ ...narrationBoxStyle, minHeight: 100 }}>
             <Typewriter
@@ -377,7 +369,6 @@ export const Pilot02GitVsGithub: React.FC = () => {
           sceneNumber={6}
           totalScenes={TOTAL_SCENES}
           keyword={SCENE_KEYWORDS[5]}
-          transition="zoom-blur"
         >
           <div style={{ ...narrationBoxStyle, minHeight: 44 }}>
             <TextReveal

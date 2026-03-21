@@ -29,6 +29,32 @@ export function Serie01SceneShell({
   children,
 }: Serie01SceneShellProps): React.ReactElement {
   const isStack = layout === "stack";
+  /**
+   * Bounded column centered on the frame: avoids flex `alignItems: center` shrinking
+   * children to intrinsic width (misaligned titles / GlitchText bleed).
+   * Stack layout fills vertical space so in-flow footers (e.g. FlowChart) sit in the
+   * padded content box — do not use `position: absolute` for those (see
+   * thp-video-generation references/stack-scene-flowchart-layout.md).
+   */
+  const sceneColumn = (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: 1000,
+        alignSelf: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        boxSizing: "border-box",
+        ...(isStack
+          ? { flex: 1, minHeight: 0 }
+          : { flexShrink: 0 }),
+      }}
+    >
+      {children}
+    </div>
+  );
+
   const content = (
     <AbsoluteFill>
       <div
@@ -37,7 +63,7 @@ export function Serie01SceneShell({
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: isStack ? "stretch" : "center",
+          alignItems: "center",
           justifyContent: isStack ? "flex-start" : "center",
           paddingTop: 88,
           paddingLeft: 40,
@@ -47,7 +73,7 @@ export function Serie01SceneShell({
           position: "relative",
         }}
       >
-        {children}
+        {sceneColumn}
       </div>
     </AbsoluteFill>
   );

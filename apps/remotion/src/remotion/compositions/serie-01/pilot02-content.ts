@@ -96,12 +96,16 @@ export const GITHUB_CALLOUT_START_FRAME =
   GITHUB_CALLOUT_PAUSE_AFTER_BODY;
 export const GITHUB_CALLOUT_CPS = 24;
 
-/** Mini schéma machine ↔ nuage: starts late in scene 4 (local frames). */
+/** When the GitHub FlowChart beat begins (scene-local frames). */
 export const GITHUB_FLOW_FROM_LOCAL = 210;
+export const GITHUB_FLOW_START_LOCAL = 4;
+/** FlowChart `startFrame` inside scene Sequence (local frames). */
+export const GITHUB_FLOWCHART_START_FRAME =
+  GITHUB_FLOW_FROM_LOCAL + GITHUB_FLOW_START_LOCAL;
+export const GITHUB_FLOW_NODE_DELAY = 18;
+/** @deprecated Inner Sequence removed; kept for outline / KM timing notes. */
 export const GITHUB_FLOW_DURATION =
   SCENE_DURATIONS.githubConcept - GITHUB_FLOW_FROM_LOCAL;
-export const GITHUB_FLOW_NODE_DELAY = 18;
-export const GITHUB_FLOW_START_LOCAL = 4;
 
 // --- Scene 5: recap ---
 export const RECAP_TEXT =
