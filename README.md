@@ -23,7 +23,7 @@ Documentation is organized with the [Diataxis](https://diataxis.fr/) framework i
 | **Index** | [KM/Docs/01-index.md](KM/Docs/01-index.md) | Full index (architecture, runbooks, templates) |
 | **Architecture** | [KM/Docs/00-architecture.md](KM/Docs/00-architecture.md) | Directory tree, UI vs Remotion, repositories |
 | **Video-AI** | [video-lifecycle](KM/Docs/reference/video-lifecycle.md) · [vision](KM/Docs/explanation/video-ai-vision.md) | Canonical reference, lifecycle, vision v1/v2/v3 |
-| **Runbooks** | [monorepo](KM/Docs/runbooks/monorepo.md) · [remotion](KM/Docs/runbooks/remotion.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) | Procedures (Turborepo, Remotion, Bun/Biome, Storybook) |
+| **Runbooks** | [monorepo](KM/Docs/runbooks/monorepo.md) · [remotion](KM/Docs/runbooks/remotion.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) · [deploy self-host](KM/Docs/runbooks/deploy-selfhost-api-frontend.md) | Procedures (Turborepo, Remotion, Bun/Biome, Storybook, Docker/Coolify) |
 
 ## Monorepo contents
 
@@ -34,7 +34,9 @@ Stack: **Turborepo**, **Bun** (package manager), **Biome** (lint/format), TypeSc
 - **`remotion`** — [Remotion](https://www.remotion.dev/) Studio: create and preview video compositions (registered under `apps/remotion/src/remotion/compositions/`).
 - **`storybook`** — [Storybook](https://storybook.js.org/): documentation for the static UI component library.
 
-*(Other apps, e.g. `docs` / `web` Next.js, may be added; see [00-architecture](KM/Docs/00-architecture.md).)*
+- **`api`** / **`frontend`** — Hono + Bun API and Vite catalogue (see [deploy self-host](KM/Docs/runbooks/deploy-selfhost-api-frontend.md)). Dockerfiles: `apps/api/Dockerfile`, `apps/frontend/Dockerfile`, `apps/storybook/Dockerfile`, `apps/remotion/Dockerfile` (build from repo root).
+
+*(Other apps may be added; see [00-architecture](KM/Docs/00-architecture.md).)*
 
 ### Packages
 
@@ -72,6 +74,7 @@ From the repo root (Video-AI):
 | Install | `bun install` |
 | Bootstrap agent paths (Cursor `.cursor/skills`) | `bun run bootstrap:agents` |
 | Build all | `bun run build` |
+| Build Storybook static | `bun run build-storybook` |
 | Dev all | `bun run dev` |
 | Dev Remotion only | `bun run dev --filter=remotion` |
 | Dev Storybook only | `bun run storybook` or `bun run dev --filter=storybook` → **http://localhost:6006** (not port 3000) |

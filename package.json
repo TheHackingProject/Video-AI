@@ -4,8 +4,10 @@
   "scripts": {
     "bootstrap:agents": "bash scripts/bootstrap-agent-tooling.sh",
     "build": "turbo run build",
+    "build-storybook": "turbo run build-storybook --filter=storybook",
     "dev": "turbo run dev",
     "storybook": "turbo run storybook --filter=storybook",
+    "remotion": "turbo run remotion --filter=remotion",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"

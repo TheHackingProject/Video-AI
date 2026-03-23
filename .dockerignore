@@ -1,0 +1,41 @@
+# Dependencies and caches
+node_modules
+**/node_modules
+.pnp
+.pnp.js
+
+# Git and IDE
+.git
+.gitignore
+.cursor
+
+# Build outputs (rebuilt inside image)
+.turbo
+**/.turbo
+dist
+**/dist
+apps/storybook/storybook-static
+.next
+**/.next
+
+# Env and secrets
+.env
+.env.*
+!.env.example
+
+# Docs and course content (not needed for app images)
+KM
+
+# Large optional workspace — not imported by api/frontend/remotion/storybook builds
+packages/skills
+
+# Tests and coverage
+coverage
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Misc
+*.md
+!README.md
