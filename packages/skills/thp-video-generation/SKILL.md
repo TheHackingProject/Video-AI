@@ -1,9 +1,9 @@
 ---
 name: thp-video-generation
-description: THP Video-AI pipeline — choose Remotion visuals per block type (text, code, transitions, 3D, diagrams), enforce Storybook-to-demo-to-doc workflow, solarTheme and runbooks. Use when the user authors or reviews THP course videos, Remotion compositions, pilot outlines, block library choice, video title beats, transition order, diagram vs terminal, THP video skill, or visual choice for a lesson.
+description: THP Video-AI pipeline — choose Remotion visuals per block type (text, code, transitions, 3D, diagrams), enforce Storybook-to-demo-to-doc workflow, solarTheme and runbooks. Includes Visual Soul research (vulgarisation, non-text beats). Use when the user authors or reviews THP course videos, Remotion compositions, pilot outlines, block library choice, video title beats, transition order, diagram vs terminal, THP video skill, visual creativity, or visual choice for a lesson.
 category: onboarding
 metadata:
-  tags: thp, video-ai, remotion, solarpunk, storybook, workflow
+  tags: thp, video-ai, remotion, solarpunk, storybook, workflow, vulgarisation, visuals
 ---
 
 # THP Video generation (Video-AI monorepo)
@@ -15,6 +15,7 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 - New or refactored **composition** under `apps/remotion/src/remotion/compositions/`.
 - **Pilot / outline** work in `KM/Docs/video-ai-preparation/`.
 - Deciding **which visual** for a beat (code vs text vs diagram vs 3D vs transition).
+- Raising **creative / pedagogical** bar: less text-only, more **vulgarisation** cues for a general audience.
 - Adding a **missing** UI block: static component, Storybook, demo, docs.
 
 ## Source of truth (strict, no duplicate matrix)
@@ -25,8 +26,21 @@ Project-specific skill. Pair with **remotion-best-practices** from `packages/ski
 4. `KM/Docs/runbooks/remotion.md` — Remotion-specific commands and runtime guidance.
 5. `KM/Docs/reference/solarpunk-theme-decisions.md` — theme/motion decisions log (history, not matrix source).
 6. `packages/ui/src/lib/remotion/index.ts` — available exports to apply the matrix.
+7. **Visual Soul (research)** — `KM/Docs/research/soul-recherche-visuelle.md` + topic file(s) e.g. `KM/Docs/research/git-github-vulgarisation-visuelle.md`. Agent summary: [`references/visual-soul-workflow.md`](references/visual-soul-workflow.md).
 
 If another doc disagrees with the matrix, update this SKILL + matrix first, then align docs.
+
+## Visual Soul — vulgarisation & creativity (before scripting)
+
+**Goal:** each video topic has **understandable non-text** beats for a general audience, not only animated paragraphs.
+
+1. **Open** the topic Soul file under `KM/Docs/research/` (create from the template in `soul-recherche-visuelle.md` if missing).
+2. **Append** a short **Incrément** after each research pass (metaphor, on-screen idea, anti-patterns).
+3. **Map** to the pilot outline: per scene, at least **one** bullet in **“Cues visuels / Soul”** → drives `FlowChart` / `Terminal` / `ComparisonTable` / future SVG or split layout.
+4. **Rule of thumb:** at least **one scene per Format-1 clip** where the **primary focus** is **not** a long `Typewriter` block (diagram-led or prop-led beat).
+5. Pair with **thp-solarpunk-visual** so new visuals stay on-brand (contrast, motion, Solarpunk kit).
+
+Do not duplicate the full Soul file inside outlines — **summarize** into actionable cues only.
 
 ## Workflow: missing building block
 
@@ -78,12 +92,19 @@ If another doc disagrees with the matrix, update this SKILL + matrix first, then
 
 - See `AudioDemo` / `CharactersDemo` and remotion skill rules for `audio.md`, `voiceover.md` when relevant.
 
+### Visual Soul (vulgarisation)
+
+- Did you open the **topic Soul file** in `KM/Docs/research/` and add or reuse **cues** for this pilot?
+- Does every scene have a **non-text** option considered (even if rejected with a one-line reason)?
+- For **Format 1 (~45 s)**, is there **at least one** scene whose **hero** is diagram / prop / terminal excerpt, not long narration alone?
+
 ## Anti-patterns
 
 - One-off colors or motion **outside** `solarTheme` / kit springs without ADR-level justification.
 - Decorative `--error` color (solarpunk decisions).
 - Short nested `Sequence` for content that must remain visible until scene end.
 - New animated effect **without** demo + doc update.
+- **Text-only** Format-1 clip with **no** diagram-led or prop-led hero scene when the topic file already lists viable cues.
 
 ## Done (before closing a video slice)
 
@@ -91,6 +112,8 @@ If another doc disagrees with the matrix, update this SKILL + matrix first, then
 - Studio pass on target composition; duration and holds OK.
 - `KM/Docs/Templates/thp-solarpunk-visual-checklist.md` addressed when visuals changed.
 - If new block: Storybook + demo + matrix row + runbook link if new demo name.
+- **Soul**: topic file under `KM/Docs/research/` updated when new visual metaphors were found; pilot outline **Cues visuels / Soul** aligned.
+- If the episode is **listed on the web app**: `packages/db` seed + `apps/frontend` `sceneRegistry` (see runbook `KM/Docs/runbooks/frontend.md`).
 
 ## Cursor install
 
