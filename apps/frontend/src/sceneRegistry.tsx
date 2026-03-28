@@ -3,6 +3,7 @@ import { demoShowcaseDuration } from "@repo/ui/remotion";
 import { DemoShowcaseSolarpunkDemo } from "../../remotion/src/remotion/compositions/demos";
 import { Pilot01Prerequis } from "../../remotion/src/remotion/compositions/serie-01/Pilot01Prerequis";
 import { Pilot02GitVsGithub } from "../../remotion/src/remotion/compositions/serie-01/Pilot02GitVsGithub";
+import { Pilot05Merge } from "../../remotion/src/remotion/compositions/serie-01/Pilot05Merge";
 
 export type SceneConfig = {
   component: React.ComponentType;
@@ -29,6 +30,13 @@ export const sceneRegistry: Record<string, SceneConfig> = {
   },
   Pilot02GitVsGithub: {
     component: Pilot02GitVsGithub,
+    fps: 30,
+    durationInFrames: 1350,
+    width: 1920,
+    height: 1080,
+  },
+  Pilot05Merge: {
+    component: Pilot05Merge,
     fps: 30,
     durationInFrames: 1350,
     width: 1920,

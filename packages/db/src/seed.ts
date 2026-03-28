@@ -30,6 +30,15 @@ const seedData = [
     docUrl: "https://github.com/TheHackingProject/Video-AI/blob/Dev/KM/Docs/video-ai-preparation/pilot-02-git-vs-github-outline.md",
     publishedAt: "2026-03-22T09:00:00.000Z",
   },
+  {
+    slug: "serie-01-merge",
+    title: "Serie 01 - Merge",
+    description: "Merge branches to integrate parallel work into a target branch.",
+    compositionId: "Pilot05Merge",
+    renderUrl: "https://cdn.example.com/video-ai/serie-01-merge.mp4",
+    docUrl: "https://github.com/TheHackingProject/Video-AI/blob/Dev/KM/Docs/video-ai-preparation/pilot-05-merge-outline.md",
+    publishedAt: "2026-03-27T09:00:00.000Z",
+  },
 ];
 
 async function upsertVideo(entry: (typeof seedData)[number]) {

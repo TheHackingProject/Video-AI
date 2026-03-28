@@ -18,6 +18,7 @@ import {
   Pilot02GitVsGithub,
   Pilot03Commit,
   Pilot04Branch,
+  Pilot05Merge,
 } from "./compositions/serie-01";
 
 export const RemotionRoot: React.FC = () => {
@@ -136,6 +137,15 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Pilot04Branch"
         component={Pilot04Branch}
+        durationInFrames={1350}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      <Composition
+        id="Pilot05Merge"
+        component={Pilot05Merge}
         durationInFrames={1350}
         fps={30}
         width={1920}
