@@ -10,12 +10,14 @@
   },
   "scripts": {
     "lint": "echo 'No lint configured for @repo/contracts'",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "bun test"
   },
   "dependencies": {
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5.9.2"
   }
 }

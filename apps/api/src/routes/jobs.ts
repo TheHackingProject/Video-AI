@@ -1,7 +1,6 @@
 import { RenderPipelineAcceptedSchema, RenderPipelinePayloadSchema } from "@repo/contracts";
-import { tasks } from "@trigger.dev/sdk";
-import type { renderPipelineTask } from "trigger/render-pipeline";
 import { Hono } from "hono";
+import { triggerRenderPipeline } from "../lib/triggerRenderPipeline";
 
 const jobsRoute = new Hono();
 
@@ -33,7 +32,7 @@ jobsRoute.post("/render-pipeline", async (c) => {
     return c.json({ error: "Invalid body", details: parsed.error.flatten() }, 400);
   }
 
-  const handle = await tasks.trigger<typeof renderPipelineTask>("render-pipeline", parsed.data);
+  const handle = await triggerRenderPipeline(parsed.data);
   const body = RenderPipelineAcceptedSchema.parse({
     message: "render-pipeline queued",
     id: handle.id,
