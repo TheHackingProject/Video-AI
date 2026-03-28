@@ -1,6 +1,7 @@
 import { RenderPipelineAcceptedSchema, RenderPipelinePayloadSchema } from "@repo/contracts";
+import { tasks } from "@trigger.dev/sdk";
+import type { renderPipelineTask } from "trigger/render-pipeline";
 import { Hono } from "hono";
-import { renderPipelineTask } from "../trigger/renderPipeline";
 
 const jobsRoute = new Hono();
 
@@ -9,7 +10,7 @@ jobsRoute.post("/render-pipeline", async (c) => {
     return c.json(
       {
         error: "TRIGGER_SECRET_KEY is not set",
-        hint: "Configure Trigger.dev (see KM/Docs/runbooks/api.md)",
+        hint: "Configure Trigger (self-hostable instance): TRIGGER_SECRET_KEY, TRIGGER_API_URL. See KM/Docs/runbooks/api.md",
       },
       503,
     );
@@ -21,7 +22,7 @@ jobsRoute.post("/render-pipeline", async (c) => {
     return c.json({ error: "Invalid body", details: parsed.error.flatten() }, 400);
   }
 
-  const handle = await renderPipelineTask.trigger(parsed.data);
+  const handle = await tasks.trigger<typeof renderPipelineTask>("render-pipeline", parsed.data);
   const body = RenderPipelineAcceptedSchema.parse({
     message: "render-pipeline queued",
     id: handle.id,

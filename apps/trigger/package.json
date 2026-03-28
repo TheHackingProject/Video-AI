@@ -1,0 +1,29 @@
+{
+  "name": "trigger",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./render-pipeline": "./src/trigger/renderPipeline.ts"
+  },
+  "scripts": {
+    "build": "bun run check-types && mkdir -p dist && touch dist/.build-stamp",
+    "dev": "npx trigger.dev@latest dev",
+    "lint": "eslint src trigger.config.ts",
+    "check-types": "tsc --noEmit",
+    "trigger:dev": "npx trigger.dev@latest dev",
+    "trigger:deploy": "npx trigger.dev@latest deploy"
+  },
+  "dependencies": {
+    "@repo/contracts": "*",
+    "@trigger.dev/sdk": "4.4.3"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@trigger.dev/build": "4.4.3",
+    "@types/bun": "latest",
+    "@types/node": "^24.5.2",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.2"
+  }
+}

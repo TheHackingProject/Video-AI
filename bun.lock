@@ -20,10 +20,10 @@
         "@repo/db": "*",
         "@trigger.dev/sdk": "4.4.3",
         "hono": "^4.10.5",
+        "trigger": "workspace:*",
       },
       "devDependencies": {
         "@repo/eslint-config": "*",
-        "@trigger.dev/build": "4.4.3",
         "@types/bun": "latest",
         "@types/node": "^24.5.2",
         "eslint": "^9.39.1",
@@ -107,6 +107,22 @@
         "typescript": "^5",
         "vite": "^7.3.1",
         "vitest": "^4.0.18",
+      },
+    },
+    "apps/trigger": {
+      "name": "trigger",
+      "version": "0.0.0",
+      "dependencies": {
+        "@repo/contracts": "*",
+        "@trigger.dev/sdk": "4.4.3",
+      },
+      "devDependencies": {
+        "@repo/eslint-config": "*",
+        "@trigger.dev/build": "4.4.3",
+        "@types/bun": "latest",
+        "@types/node": "^24.5.2",
+        "eslint": "^9.39.1",
+        "typescript": "^5.9.2",
       },
     },
     "packages/contracts": {
@@ -1857,6 +1873,8 @@
 
     "tr46": ["tr46@1.0.1", "", { "dependencies": { "punycode": "^2.1.0" } }, "sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA=="],
 
+    "trigger": ["trigger@workspace:apps/trigger"],
+
     "ts-api-utils": ["ts-api-utils@2.4.0", "", { "peerDependencies": { "typescript": ">=4.8.4" } }, "sha512-3TaVTaAv2gTiMB35i3FiGJaRfwb3Pyn/j3m/bfAvGe8FB7CF6u+LMYqYlDh7reQf7UNvoTvdfAqHGmPGOSsPmA=="],
 
     "ts-dedent": ["ts-dedent@2.2.0", "", {}, "sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ=="],
@@ -2224,6 +2242,8 @@
     "storybook/tailwindcss": ["tailwindcss@4.2.1", "", {}, "sha512-/tBrSQ36vCleJkAOsy9kbNTgaxvGbyOamC30PRePTQe/o1MFwEKHQk4Cn7BNGaPtjp+PuUrByJehM1hgxfq4sw=="],
 
     "terser-webpack-plugin/schema-utils": ["schema-utils@4.3.3", "", { "dependencies": { "@types/json-schema": "^7.0.9", "ajv": "^8.9.0", "ajv-formats": "^2.1.1", "ajv-keywords": "^5.1.0" } }, "sha512-eflK8wEtyOE6+hsaRVPxvUKYCpRgzLqDTb8krvAsRIwOGlHoSgYLgBXoubGgLd2fT41/OUYdb48v4k4WWHQurA=="],
+
+    "trigger/typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
     "tsconfig-paths/minimist": ["minimist@1.2.8", "", {}, "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="],
 

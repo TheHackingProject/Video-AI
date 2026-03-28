@@ -8,19 +8,18 @@
     "build": "bun build src/index.ts --target bun --outdir dist",
     "lint": "eslint src test",
     "check-types": "tsc --noEmit",
-    "test": "bun test",
-    "trigger:dev": "npx trigger.dev@latest dev"
+    "test": "bun test"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.4",
     "@repo/contracts": "*",
     "@repo/db": "*",
     "@trigger.dev/sdk": "4.4.3",
-    "hono": "^4.10.5"
+    "hono": "^4.10.5",
+    "trigger": "workspace:*"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@trigger.dev/build": "4.4.3",
     "@types/bun": "latest",
     "@types/node": "^24.5.2",
     "eslint": "^9.39.1",

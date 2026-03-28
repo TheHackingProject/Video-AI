@@ -67,7 +67,7 @@ export const notifyRenderTask = task({
 });
 
 /**
- * Orchestrates prepare → render (stub) → notify. Trigger from Hono: POST /jobs/render-pipeline.
+ * Orchestrates prepare → render (stub) → notify. Trigger from API via tasks.trigger (type-only import).
  */
 export const renderPipelineTask = task({
   id: "render-pipeline",
