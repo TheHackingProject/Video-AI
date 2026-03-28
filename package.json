@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "bootstrap:agents": "bash scripts/bootstrap-agent-tooling.sh",
+    "env:init": "sh -c 'if [ ! -f .env ]; then cp .env.example .env && echo \"Created .env from .env.example\"; else echo \".env already exists — not overwritten\"; fi'",
     "build": "turbo run build",
     "build-storybook": "turbo run build-storybook --filter=storybook",
     "dev": "turbo run dev",

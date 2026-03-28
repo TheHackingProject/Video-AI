@@ -8,8 +8,11 @@ Monorepo and tooling to **produce and evolve pedagogical videos** for [The Hacki
 git clone --recurse-submodules <repo-url>
 cd Video-AI
 bun install
+bun run env:init   # copies .env.example → .env if missing; edit .env (never commit it)
 bun run dev --filter=remotion
 ```
+
+Environment template: [`.env.example`](.env.example). For API, Postgres, frontend, and Trigger self-host variables, see [monorepo runbook](KM/Docs/runbooks/monorepo.md#environment-env).
 
 Remotion Studio opens to preview and edit compositions. For the full workflow (idea → script → composition → review → render), see [KM/Docs/runbooks/video-ai-development.md](KM/Docs/runbooks/video-ai-development.md).
 
