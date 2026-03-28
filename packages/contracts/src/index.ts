@@ -27,3 +27,18 @@ export type VideoDto = z.infer<typeof VideoSchema>;
 export type VideosResponseDto = z.infer<typeof VideosResponseSchema>;
 export type VideoResponseDto = z.infer<typeof VideoResponseSchema>;
 export type ApiErrorDto = z.infer<typeof ApiErrorSchema>;
+
+/** Payload for POST /jobs/render-pipeline (Trigger.dev orchestration POC). */
+export const RenderPipelinePayloadSchema = z.object({
+  compositionId: z.string().min(1).default("MyComp"),
+  correlationId: z.string().optional(),
+});
+
+export type RenderPipelinePayloadDto = z.infer<typeof RenderPipelinePayloadSchema>;
+
+export const RenderPipelineAcceptedSchema = z.object({
+  message: z.string(),
+  id: z.string().optional(),
+});
+
+export type RenderPipelineAcceptedDto = z.infer<typeof RenderPipelineAcceptedSchema>;

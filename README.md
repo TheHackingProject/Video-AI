@@ -22,7 +22,7 @@ Documentation is organized with the [Diataxis](https://diataxis.fr/) framework i
 | **Knowledge Base** | [KM/Docs/Readme.md](KM/Docs/Readme.md) | Project doc entry point |
 | **Index** | [KM/Docs/01-index.md](KM/Docs/01-index.md) | Full index (architecture, runbooks, templates) |
 | **Architecture** | [KM/Docs/00-architecture.md](KM/Docs/00-architecture.md) | Directory tree, UI vs Remotion, repositories |
-| **Video-AI** | [video-lifecycle](KM/Docs/reference/video-lifecycle.md) · [vision](KM/Docs/explanation/video-ai-vision.md) | Canonical reference, lifecycle, vision v1/v2/v3 |
+| **Video-AI** | [roadmap](KM/Docs/02-video-ai-roadmap.md) · [Trigger.dev v4](KM/Docs/reference/video-ai-orchestrator-decision.md) · [Mastra + OpenClaw](KM/Docs/reference/video-ai-upper-layers-mastra-openclaw.md) · [lifecycle](KM/Docs/reference/video-lifecycle.md) · [vision](KM/Docs/explanation/video-ai-vision.md) | Plan, orchestrateur, couches IA v2, séquence, vision |
 | **Runbooks** | [monorepo](KM/Docs/runbooks/monorepo.md) · [remotion](KM/Docs/runbooks/remotion.md) · [bun-biome](KM/Docs/runbooks/bun-biome.md) · [storybook](KM/Docs/runbooks/storybook.md) · [deploy self-host](KM/Docs/runbooks/deploy-selfhost-api-frontend.md) | Procedures (Turborepo, Remotion, Bun/Biome, Storybook, Docker/Coolify) |
 
 ## Monorepo contents
