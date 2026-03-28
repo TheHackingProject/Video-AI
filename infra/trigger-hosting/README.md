@@ -5,9 +5,13 @@ This folder **does not** contain the Trigger.dev platform. It **documents how to
 - **`apps/trigger`** — workspace / **package tasks** only (`trigger.config.ts`, task code, CLI `dev` / `deploy`).
 - **`apps/api`** — HTTP API; triggers runs via `@trigger.dev/sdk` (`tasks.trigger`, type-only link to task types).
 
+## Product policy (Video-AI)
+
+**Sovereign operation only** : run Trigger on **infrastructure we control** (this upstream stack). **Do not** use **Trigger.dev Cloud** for Video-AI (no project keys, no default API endpoint to `cloud.trigger.dev`). The API enforces **`TRIGGER_API_URL`** + **`TRIGGER_SECRET_KEY`** for job enqueue — see [KM/Docs/runbooks/api.md](../../KM/Docs/runbooks/api.md).
+
 ## Capacity wording
 
-Use **self-hostable with documented limitations vs managed cloud** (warm starts, autoscaling, some cloud-only features). Do not claim full parity with Trigger.dev Cloud.
+Use **self-hostable with documented limitations vs managed Trigger SaaS** (warm starts, autoscaling, some vendor-cloud-only features). We still do **not** use that SaaS for this product.
 
 ## Upstream source of truth
 
@@ -45,7 +49,7 @@ npx trigger.dev@latest login -a https://trigger.your-domain.example
 npx trigger.dev@latest whoami
 ```
 
-Use **`--api-url` / `-a`** so the CLI does not default to Trigger.dev Cloud. Run **`dev`** / **`deploy`** from **`apps/trigger`** in this repo.
+Use **`--api-url` / `-a`** exclusively toward **our** self-host URL (never Cloud for this repo). Run **`dev`** / **`deploy`** from **`apps/trigger`** in this repo.
 
 ## CI (optional)
 
