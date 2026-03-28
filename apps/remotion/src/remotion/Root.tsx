@@ -19,6 +19,7 @@ import {
   Pilot03Commit,
   Pilot04Branch,
   Pilot05Merge,
+  Pilot06PullRequest,
 } from "./compositions/serie-01";
 
 export const RemotionRoot: React.FC = () => {
@@ -146,6 +147,15 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Pilot05Merge"
         component={Pilot05Merge}
+        durationInFrames={1350}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      <Composition
+        id="Pilot06PullRequest"
+        component={Pilot06PullRequest}
         durationInFrames={1350}
         fps={30}
         width={1920}

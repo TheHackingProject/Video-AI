@@ -4,6 +4,7 @@ import { DemoShowcaseSolarpunkDemo } from "../../remotion/src/remotion/compositi
 import { Pilot01Prerequis } from "../../remotion/src/remotion/compositions/serie-01/Pilot01Prerequis";
 import { Pilot02GitVsGithub } from "../../remotion/src/remotion/compositions/serie-01/Pilot02GitVsGithub";
 import { Pilot05Merge } from "../../remotion/src/remotion/compositions/serie-01/Pilot05Merge";
+import { Pilot06PullRequest } from "../../remotion/src/remotion/compositions/serie-01/Pilot06PullRequest";
 
 export type SceneConfig = {
   component: React.ComponentType;
@@ -37,6 +38,13 @@ export const sceneRegistry: Record<string, SceneConfig> = {
   },
   Pilot05Merge: {
     component: Pilot05Merge,
+    fps: 30,
+    durationInFrames: 1350,
+    width: 1920,
+    height: 1080,
+  },
+  Pilot06PullRequest: {
+    component: Pilot06PullRequest,
     fps: 30,
     durationInFrames: 1350,
     width: 1920,
