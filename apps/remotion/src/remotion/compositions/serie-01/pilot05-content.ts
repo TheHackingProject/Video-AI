@@ -83,8 +83,8 @@ export const MERGE_FLOW_BODY_START_FRAME =
   MERGE_FLOW_TITLE_REVEAL_DURATION + MERGE_FLOW_PAUSE_AFTER_TITLE;
 export const MERGE_FLOW_BODY_CPS = 27;
 
-/** When the FlowChart beat begins (scene-local frames). */
-export const MERGE_FLOW_FROM_LOCAL = 200;
+/** When the FlowChart beat begins (scene-local frames). Lower = diagram is the visual hero sooner (workflow schéma). */
+export const MERGE_FLOW_FROM_LOCAL = 110;
 export const MERGE_FLOW_START_LOCAL = 4;
 export const MERGE_FLOWCHART_START_FRAME =
   MERGE_FLOW_FROM_LOCAL + MERGE_FLOW_START_LOCAL;
