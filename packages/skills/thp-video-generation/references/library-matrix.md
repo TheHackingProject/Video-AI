@@ -33,3 +33,13 @@ Each pilot `*-content.ts` defines role-tagged blocks before TSX wiring:
 TSX must map these roles to the matrix above without silent exceptions.
 
 If no row matches your need: **Storybook static first** -> optional **remotion-lib** -> **new demo** -> update this matrix and `SKILL.md`.
+
+## Série 01 — Pilot 01 (V1, étalon pédagogique)
+
+Référence composition : `Pilot01Prerequis` + `pilot01-content.ts`. Pattern **sans nouveau composant** :
+
+- **Intro** : `FlowChart` horizontal (parcours 3 nœuds) + `Typewriter` (accroche) + `TextReveal` (objectif) — un message dominant par beat.
+- **Step concept + code** : `Serie01SceneShell` `layout="stack"` : zone haute (narration, `CodeBlockStatic`, pills) + `Sequence` bas avec `FlowChart` (arc pédagogique).
+- **Steps CLI** : grille 2 colonnes — narration à gauche ; droite = mini `FlowChart` vertical (commande → effet) + `Terminal` (réduit en largeur si besoin).
+
+Durée : `PILOT01_DURATION_FRAMES` (3690 @ 30 fps) — `Root.tsx` et `apps/frontend` alignés. Détail : [pilot-01-prerequis-outline.md](../../../../KM/Docs/video-ai-preparation/pilot-01-prerequis-outline.md) (V1).

@@ -29,15 +29,26 @@ export const PREMOUNT_FRAMES = FPS;
 /** Light overlap between beats (smooth handoff). */
 export const BEAT_OVERLAP_FRAMES = 10;
 
+/** Sum must match `durationInFrames` for `Pilot01Prerequis` in Root + sceneRegistry (currently 3690 @ 30fps). */
 export const SCENE_DURATIONS = {
   title: 5 * FPS,
-  intro: 14 * FPS,
+  /** V1 refonte: journey FlowChart + hook Typewriter + objective TextReveal (+3s vs V0.8). */
+  intro: 17 * FPS,
   step1: 32 * FPS,
   step2: 26 * FPS,
   step3: 26 * FPS,
   recap: 12 * FPS,
   cta: 5 * FPS,
 } as const;
+
+export const PILOT01_DURATION_FRAMES =
+  SCENE_DURATIONS.title +
+  SCENE_DURATIONS.intro +
+  SCENE_DURATIONS.step1 +
+  SCENE_DURATIONS.step2 +
+  SCENE_DURATIONS.step3 +
+  SCENE_DURATIONS.recap +
+  SCENE_DURATIONS.cta;
 
 export const FRAME = {
   title: 0,
@@ -84,7 +95,7 @@ export const TITLE_SUBTITLE_REVEAL_DURATION = 24;
 export const TITLE_SUBTITLE_START_FRAME =
   TITLE_GLITCH_DURATION + TITLE_PAUSE_AFTER_GLITCH_FRAMES;
 
-// --- Intro (two typewriter blocks, single scene) ---
+// --- Intro: journey FlowChart + Typewriter hook + TextReveal objective (V1 refonte visuelle) ---
 export const INTRO_HOOK =
   "Salut ! Dans les prochaines vidéos, on va taper des commandes Git dans le terminal. Rien de sorcier : aujourd’hui, on ouvre cette fenêtre et on teste deux commandes ultra simples.";
 
@@ -93,14 +104,15 @@ export const INTRO_OBJECTIVE =
 
 export const INTRO_TYPEWRITER_CPS = 24;
 export const INTRO_PAUSE_AFTER_HOOK_FRAMES = 6;
+/** Mini journey chart (Ouvrir → pwd → ls) — pacing only; labels rendered in composition. */
+export const INTRO_JOURNEY_NODE_DELAY = 11;
 export const INTRO_HOOK_FRAMES = Math.ceil(
   (INTRO_HOOK.length / INTRO_TYPEWRITER_CPS) * FPS
 );
-export const INTRO_OBJECTIVE_FRAMES = Math.ceil(
-  (INTRO_OBJECTIVE.length / INTRO_TYPEWRITER_CPS) * FPS
-);
 export const INTRO_OBJECTIVE_START_FRAME =
   INTRO_HOOK_FRAMES + INTRO_PAUSE_AFTER_HOOK_FRAMES;
+/** Replaces second Typewriter block for objective (less “wall of text”, clearer hero/secondary). */
+export const INTRO_OBJECTIVE_REVEAL_DURATION = 28;
 
 // --- Step 1 beats (960f): analogy -> pills -> OS hint -> code ---
 export const STEP1_ANALOGY =
@@ -126,6 +138,11 @@ export const STEP1_BEATS = {
   osLine: { from: 378, duration: SCENE_DURATIONS.step1 - 378 },
   code: { from: 538, duration: SCENE_DURATIONS.step1 - 538 },
 } as const;
+
+/** Bottom FlowChart in step1 stack (lesson arc) — scene-local `Sequence.from`. */
+export const STEP1_BOTTOM_FLOW_FROM = 420;
+export const STEP1_BOTTOM_FLOW_START_LOCAL = 10;
+export const STEP1_BOTTOM_FLOW_NODE_DELAY = 12;
 
 // --- Step 2 / 3 body (split for staggered typewriter) ---
 export const STEP2_PARA1 =

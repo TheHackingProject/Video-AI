@@ -13,6 +13,7 @@ import {
   TransitionsDemo,
   DemoShowcaseSolarpunkDemo,
 } from "./compositions/demos";
+import { PILOT01_DURATION_FRAMES } from "./compositions/serie-01/pilot01-content";
 import {
   Pilot01Prerequis,
   Pilot02GitVsGithub,
@@ -111,7 +112,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Pilot01Prerequis"
         component={Pilot01Prerequis}
-        durationInFrames={3600}
+        durationInFrames={PILOT01_DURATION_FRAMES}
         fps={30}
         width={1920}
         height={1080}

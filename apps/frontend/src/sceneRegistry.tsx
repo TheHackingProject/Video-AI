@@ -1,6 +1,7 @@
 import type React from "react";
 import { demoShowcaseDuration } from "@repo/ui/remotion";
 import { DemoShowcaseSolarpunkDemo } from "../../remotion/src/remotion/compositions/demos";
+import { PILOT01_DURATION_FRAMES } from "../../remotion/src/remotion/compositions/serie-01/pilot01-content";
 import { Pilot01Prerequis } from "../../remotion/src/remotion/compositions/serie-01/Pilot01Prerequis";
 import { Pilot02GitVsGithub } from "../../remotion/src/remotion/compositions/serie-01/Pilot02GitVsGithub";
 import { Pilot05Merge } from "../../remotion/src/remotion/compositions/serie-01/Pilot05Merge";
@@ -25,7 +26,7 @@ export const sceneRegistry: Record<string, SceneConfig> = {
   Pilot01Prerequis: {
     component: Pilot01Prerequis,
     fps: 30,
-    durationInFrames: 3600,
+    durationInFrames: PILOT01_DURATION_FRAMES,
     width: 1920,
     height: 1080,
   },
